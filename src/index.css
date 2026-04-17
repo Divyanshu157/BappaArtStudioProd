@@ -1,0 +1,36 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", serif;
+  --color-accent: #fca311;
+  --color-gold: #d4af37;
+  --color-marble: #f8f9fa;
+}
+
+@layer base {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+
+  body {
+    @apply bg-neutral-50 text-neutral-900 font-sans antialiased selection:bg-accent/30;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+  }
+  .glass-panel {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  .bg-grid {
+    background-image: radial-gradient(circle, #00000010 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+}
