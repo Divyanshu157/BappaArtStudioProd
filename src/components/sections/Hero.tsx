@@ -6,11 +6,6 @@ import { cn } from '@/src/lib/utils';
 
 const slides = [
   {
-    image: "/assets/images/mama.png",  
-    title: "Ancient Art Meets Modern Grace",
-    subtitle: "Crafting divine sculptures for over five decades with unwavering devotion."
-  },
-  {
     image: "/assets/images/ganesh/g1.jpeg",
     title: "The Soul of Marble",
     subtitle: "Meticulously handcrafted using timeless techniques passed through generations."
@@ -19,6 +14,11 @@ const slides = [
     image: "/assets/images/saraswati/s1.jpeg",
     title: "Bespoke Divine Creations",
     subtitle: "Tailored to your space and devotion, bringing spiritual energy to your home."
+  },
+  {
+    image: "/assets/images/mama.png",  
+    title: "Ancient Art Meets Modern Grace",
+    subtitle: "Crafting divine sculptures for over five decades with unwavering devotion."
   }
 ];
 
@@ -29,7 +29,7 @@ const Hero = () => {
   const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
   useEffect(() => {
-    const timer = setInterval(next, 8000);
+    const timer = setInterval(next, 10000);
     return () => clearInterval(timer);
   }, []);
 
