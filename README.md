@@ -1,20 +1,93 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# BappaArtStudioProd
+Bappa Art Studio is a React-based frontend application designed to present a premium marble sculpture portfolio with modern UI/UX. It features responsive layouts, animated sections, interactive galleries, and performance optimization, deployed on Vercel for fast global delivery.
 
-# Run and deploy your AI Studio app
+## 🎨 Bappa Art Studio
+Bappa Art Studio is a modern **React-based portfolio website** designed to showcase premium marble sculptures and artistic creations.
+The platform provides an elegant digital experience for art lovers and potential buyers through smooth animations, responsive design, and interactive image galleries.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/4b3d4340-469a-4f1b-9a41-5531ffed0bb5
+## 🌐 Live Website
+Deployed on **Vercel**
 
-## Run Locally
+```
+https://your-vercel-url.vercel.app
+```
 
-**Prerequisites:**  Node.js
+---
+
+## ✨ Features
+* ⚛️ Built with **React**
+* 🎨 Premium UI designed for showcasing marble sculptures
+* 🖼️ Interactive gallery and portfolio sections
+* 📱 Fully responsive design (mobile friendly)
+* ⚡ Fast performance with optimized assets
+* 🚀 Deployed globally using **Vercel**
+
+---
+
+## 🛠️ Tech Stack
+* **React**
+* **JavaScript**
+* **HTML5**
+* **CSS3**
+* **Tailwind CSS**
+* **Vite**
+* **Vercel (Deployment)**
+
+---
+
+## 📦 Installation
+Clone the repository
+
+```bash
+git clone https://github.com/Divyanshu157/BappaArtStudioProd.git
+```
+
+Navigate to the project directory
+
+```bash
+cd BappaArtStudioProd
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the development server
+
+```bash
+npm run dev
+```
+
+---
+
+## 📁 Project Structure
+```
+src/
+ ├── components
+ ├── pages
+ ├── public/
+ ├── style/
+ └── App.tsx
+```
+
+---
+
+## 🎯 Purpose of the Project
+This project was created to build a **premium online presence for Bappa Art Studio**, helping showcase marble sculptures with modern web design and smooth user experience.
+
+---
+
+## 🤝 Contributing
+Contributions are welcome. Feel free to open issues or submit pull requests.
+
+---
+
+## 📜 License
 
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+This project is licensed under the **MIT License**.
+>>>>>>> 5ca59fcfdf86b2fcff217edefddd68d854ad839e
