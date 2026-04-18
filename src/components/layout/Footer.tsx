@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Facebook, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
@@ -26,20 +27,20 @@ const Footer = () => {
         <div>
           <h4 className="font-serif text-xl font-bold mb-6">Quick Links</h4>
           <ul className="space-y-4 text-neutral-400">
-            <li><a href="/products" className="hover:text-accent transition-colors">Our Gallery</a></li>
-            <li><a href="/vision-values" className="hover:text-accent transition-colors">Vision & Values</a></li>
-            <li><a href="/testimonials" className="hover:text-accent transition-colors">Testimonials</a></li>
-            <li><a href="/contact" className="hover:text-accent transition-colors">Contact Us</a></li>
+            <li><Link to="/products" className="hover:text-accent transition-colors">Our Gallery</Link></li>
+            <li><Link to="/vision-values" className="hover:text-accent transition-colors">Vision & Values</Link></li>
+            <li><Link to="/testimonials" className="hover:text-accent transition-colors">Testimonials</Link></li>
+            <li><Link to="/contact" className="hover:text-accent transition-colors">Contact Us</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-serif text-xl font-bold mb-6">Services</h4>
           <ul className="space-y-4 text-neutral-400">
-            <li><a href="/signature-crafting" className="hover:text-accent transition-colors">Signature Crafting</a></li>
-            <li><a href="/heritage-restoration" className="hover:text-accent transition-colors">Heritage Restoration</a></li>
-            <li><a href="/care-maintenance" className="hover:text-accent transition-colors">Care & Maintenance</a></li>
-            <li><a href="/faq" className="hover:text-accent transition-colors">FAQ</a></li>
+            <li><Link to="/signature-crafting" className="hover:text-accent transition-colors">Signature Crafting</Link></li>
+            <li><Link to="/heritage-restoration" className="hover:text-accent transition-colors">Heritage Restoration</Link></li>
+            <li><Link to="/care-maintenance" className="hover:text-accent transition-colors">Care & Maintenance</Link></li>
+            <li><Link to="/faq" className="hover:text-accent transition-colors">FAQ</Link></li>
           </ul>
         </div>
 
