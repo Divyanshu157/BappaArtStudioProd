@@ -27,20 +27,20 @@ const Footer = () => {
         <div>
           <h4 className="font-serif text-xl font-bold mb-6">Quick Links</h4>
           <ul className="space-y-4 text-neutral-400">
-            <li><Link to="/products" className="hover:text-accent transition-colors">Our Gallery</Link></li>
-            <li><Link to="/vision-values" className="hover:text-accent transition-colors">Vision & Values</Link></li>
-            <li><Link to="/testimonials" className="hover:text-accent transition-colors">Testimonials</Link></li>
-            <li><Link to="/contact" className="hover:text-accent transition-colors">Contact Us</Link></li>
+            <li><Link to="/products" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Our Gallery</Link></li>
+            <li><Link to="/vision-values" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Vision & Values</Link></li>
+            <li><Link to="/testimonials" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Testimonials</Link></li>
+            <li><Link to="/contact" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Contact Us</Link></li>
           </ul>
         </div>
 
         <div>
           <h4 className="font-serif text-xl font-bold mb-6">Services</h4>
           <ul className="space-y-4 text-neutral-400">
-            <li><Link to="/signature-crafting" className="hover:text-accent transition-colors">Signature Crafting</Link></li>
-            <li><Link to="/heritage-restoration" className="hover:text-accent transition-colors">Heritage Restoration</Link></li>
-            <li><Link to="/care-maintenance" className="hover:text-accent transition-colors">Care & Maintenance</Link></li>
-            <li><Link to="/faq" className="hover:text-accent transition-colors">FAQ</Link></li>
+            <li><Link to="/signature-crafting" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Signature Crafting</Link></li>
+            <li><Link to="/heritage-restoration" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Heritage Restoration</Link></li>
+            <li><Link to="/care-maintenance" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">Care & Maintenance</Link></li>
+            <li><Link to="/faq" onClick={() => window.scrollTo({ top: 0, left: 0, behavior: 'instant' })} className="hover:text-accent transition-colors">FAQ</Link></li>
           </ul>
         </div>
 

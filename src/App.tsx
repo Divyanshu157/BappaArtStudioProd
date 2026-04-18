@@ -22,12 +22,16 @@ function ScrollToTop() {
     if (location.hash) {
       const element = document.querySelector(location.hash);
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        window.requestAnimationFrame(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
         return;
       }
     }
 
-    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    window.requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+    });
   }, [location.pathname, location.hash]);
 
   return null;
