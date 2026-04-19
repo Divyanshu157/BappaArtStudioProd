@@ -4,6 +4,7 @@ import { Mail, Phone, MapPin, Send, Facebook, Instagram, Youtube, MessageCircle,
 import Layout from '@/src/components/layout/Layout';
 import PageTransition from '@/src/components/layout/PageTransition';
 import { Reveal } from '@/src/components/ui/Reveal';
+import { Helmet } from 'react-helmet-async';
 
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -25,6 +26,12 @@ const Contact = () => {
 
   return (
     <Layout transparentNavbar>
+      <Helmet>
+        <title>Contact Bappa Art Studio - Commission Custom Marble Sculptures</title>
+        <meta name="description" content="Get in touch with Bappa Art Studio for custom marble sculptures. Commission divine art, heritage restoration, and premium sculptures from Jaipur, India." />
+        <meta name="keywords" content="contact Bappa Art Studio, custom sculptures, commission art, marble sculptures, Jaipur" />
+        <link rel="canonical" href="https://your-vercel-url.vercel.app/contact" />
+      </Helmet>
       <PageTransition>
         <div className="min-h-screen bg-[#050505] text-white">
           <section className="relative overflow-hidden bg-[#080808]">

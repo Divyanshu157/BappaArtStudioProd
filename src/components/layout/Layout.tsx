@@ -10,11 +10,15 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children, transparentNavbar = false }) => {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar transparent={transparentNavbar} />
+      <header>
+        <Navbar transparent={transparentNavbar} />
+      </header>
       <main className="flex-grow">
         {children}
       </main>
-      <Footer />
+      <footer>
+        <Footer />
+      </footer>
     </div>
   );
 };

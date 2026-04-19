@@ -7,6 +7,7 @@ import { ArrowRight, Star, Shield, Hammer, Sparkles, Quote, CheckCircle2 } from 
 import Layout from '@/src/components/layout/Layout';
 import PageTransition from '@/src/components/layout/PageTransition';
 import { Reveal } from '@/src/components/ui/Reveal';
+import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const featuredProducts = useMemo(() => {
@@ -15,18 +16,24 @@ const Home = () => {
 
   return (
     <Layout transparentNavbar>
+      <Helmet>
+        <title>Bappa Art Studio - Premium Marble Sculptures & Divine Artistry</title>
+        <meta name="description" content="Discover Bappa Art Studio's premium marble sculptures. Over 50 years of divine artistry, custom sculptures, heritage restoration, and spiritual art from Jaipur, India." />
+        <meta name="keywords" content="marble sculptures, divine art, Bappa Art Studio, Jaipur, custom sculptures, heritage restoration, spiritual art" />
+        <link rel="canonical" href="https://your-vercel-url.vercel.app/" />
+      </Helmet>
       <PageTransition>
         <div className="flex flex-col">
           <Hero />
 
           {/* Featured Work */}
-          <section className="py-24 px-6 bg-neutral-100">
+          <section className="py-24 px-6 bg-neutral-100" aria-labelledby="featured-work-title">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <Reveal direction="right">
                   <div className="max-w-2xl">
                     <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Exquisite Collection</span>
-                    <h2 className="text-4xl md:text-5xl font-bold mb-6">Featured Masterpieces</h2>
+                    <h2 id="featured-work-title" className="text-4xl md:text-5xl font-bold mb-6">Featured Masterpieces</h2>
                     <p className="text-neutral-600 text-lg">
                       A glimpse into our world of divine marble artistry, where every piece tells a story of devotion and meticulous craftsmanship.
                     </p>
@@ -71,7 +78,7 @@ const Home = () => {
           </section>
 
           {/* Legacy Section */}
-          <section className="py-32 px-6 bg-white">
+          <section className="py-32 px-6 bg-white" aria-labelledby="legacy-title">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <Reveal direction="right">
                 <div className="relative">

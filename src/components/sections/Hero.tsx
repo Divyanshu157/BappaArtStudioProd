@@ -34,7 +34,7 @@ const Hero = () => {
   }, []);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden">
+    <section className="relative h-screen w-full overflow-hidden" aria-label="Hero slideshow featuring marble sculptures">
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -47,6 +47,8 @@ const Hero = () => {
           <div 
             className="absolute inset-0 bg-cover bg-center"
             style={{ backgroundImage: `url(${slides[current].image})` }}
+            role="img"
+            aria-label={slides[current].title}
           />
           <div className="absolute inset-0 bg-black/40" />
         </motion.div>
