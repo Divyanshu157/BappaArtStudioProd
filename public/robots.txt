@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-vercel-url.vercel.app/sitemap.xml
+Sitemap: https://www.bappaartstudio.com/sitemap.xml

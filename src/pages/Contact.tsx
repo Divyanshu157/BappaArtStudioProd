@@ -30,7 +30,7 @@ const Contact = () => {
         <title>Contact Bappa Art Studio - Commission Custom Marble Sculptures</title>
         <meta name="description" content="Get in touch with Bappa Art Studio for custom marble sculptures. Commission divine art, heritage restoration, and premium sculptures from Jaipur, India." />
         <meta name="keywords" content="contact Bappa Art Studio, custom sculptures, commission art, marble sculptures, Jaipur" />
-        <link rel="canonical" href="https://your-vercel-url.vercel.app/contact" />
+        <link rel="canonical" href="https://www.bappaartstudio.com/contact" />
       </Helmet>
       <PageTransition>
         <div className="min-h-screen bg-[#050505] text-white">

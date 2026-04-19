@@ -20,7 +20,7 @@ const Home = () => {
         <title>Bappa Art Studio - Premium Marble Sculptures & Divine Artistry</title>
         <meta name="description" content="Discover Bappa Art Studio's premium marble sculptures. Over 50 years of divine artistry, custom sculptures, heritage restoration, and spiritual art from Jaipur, India." />
         <meta name="keywords" content="marble sculptures, divine art, Bappa Art Studio, Jaipur, custom sculptures, heritage restoration, spiritual art" />
-        <link rel="canonical" href="https://your-vercel-url.vercel.app/" />
+        <link rel="canonical" href="https://www.bappaartstudio.com/" />
       </Helmet>
       <PageTransition>
         <div className="flex flex-col">
