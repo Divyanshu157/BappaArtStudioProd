@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { motion } from 'motion/react';
 import { PRODUCTS } from '@/src/data';
 import { ArrowLeft, CheckCircle2, Mail, Phone, MessageCircle, Share2, Calendar, MapPin, User, Shield, ArrowRight } from 'lucide-react';
@@ -8,8 +9,8 @@ import PageTransition from '@/src/components/layout/PageTransition';
 import { Reveal } from '@/src/components/ui/Reveal';
 
 const ProductDetails = () => {
-  const { id } = useParams();
-  const product = PRODUCTS.find(p => p.id === Number(id));
+  const { slug } = useParams<{ slug: string }>();
+  const product = PRODUCTS.find(p => p.slug === slug);
 
   const handleShare = () => {
     const shareData = {
@@ -70,6 +71,17 @@ const ProductDetails = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-white" />
             
+            <Helmet>
+              <title>{`${product.title} - Bappa Art Studio`}</title>
+              <meta name="description" content={product.description} />
+              <link rel="canonical" href={`https://www.bappaartstudio.com/products/${product.slug}`} />
+              <meta property="og:title" content={`${product.title} - Bappa Art Studio`} />
+              <meta property="og:description" content={product.description} />
+              <meta property="og:image" content={`https://www.bappaartstudio.com${product.imageUrl}`} />
+              <meta property="twitter:title" content={`${product.title} - Bappa Art Studio`} />
+              <meta property="twitter:description" content={product.description} />
+              <meta property="twitter:image" content={`https://www.bappaartstudio.com${product.imageUrl}`} />
+            </Helmet>
             <div className="relative z-10 min-h-[35vh] md:min-h-[45vh] max-w-7xl mx-auto px-6 flex flex-col justify-between py-16 md:py-20">
               <Link to="/products" className="inline-flex items-center gap-2 text-white/80 hover:text-white transition-colors font-bold group">
                 <ArrowLeft size={18} className="group-hover:-translate-x-2 transition-transform" /> Back to Gallery
@@ -102,7 +114,7 @@ const ProductDetails = () => {
                   <div className="grid grid-cols-4 gap-6 mt-auto">
                     {relatedProducts.map((related, i) => (
                       <Reveal key={related.id} delay={i * 0.1} direction="right">
-                        <Link to={`/products/${related.id}`}>
+                        <Link to={`/products/${related.slug}`}>
                           <motion.div 
                             whileHover={{ y: -5 }}
                             className="aspect-square rounded-2xl overflow-hidden border-2 border-neutral-100 hover:border-accent cursor-pointer transition-all shadow-sm"

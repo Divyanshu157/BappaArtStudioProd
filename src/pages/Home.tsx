@@ -50,7 +50,7 @@ const Home = () => {
                 {featuredProducts.map((product, i) => (
                   <Reveal key={product.id} delay={i * 0.1}>
                     <Link 
-                      to={`/products/${product.id}`}
+                      to={`/products/${product.slug}`}
                       className="group relative block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 h-full"
                     >
                       <div className="aspect-[4/5] overflow-hidden">

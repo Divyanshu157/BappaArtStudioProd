@@ -1,6 +1,7 @@
 export interface Product {
   id: number;
   title: string;
+  slug: string;
   imageUrl: string;
   description: string;
   category?: string;
@@ -11,7 +12,13 @@ export interface Product {
   features?: string[];
 }
 
-export const PRODUCTS: Product[] = [
+const createSlug = (value: string) =>
+  value
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+const RAW_PRODUCTS: Omit<Product, 'slug'>[] = [
   {
     id: 1,
     title: "Divine Ganesha",
@@ -301,3 +308,8 @@ export const PRODUCTS: Product[] = [
     features: ["Veena details", "Swan companion", "Fine drapery carving"]
   }
 ];
+
+export const PRODUCTS: Product[] = RAW_PRODUCTS.map((product) => ({
+  ...product,
+  slug: createSlug(product.title),
+}));

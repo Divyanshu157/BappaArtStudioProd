@@ -93,7 +93,7 @@ const Products = () => {
                     {filteredProducts.map((product) => (
                       <Link
                         key={product.id}
-                        to={`/products/${product.id}`}
+                        to={`/products/${product.slug}`}
                         className="group block bg-white rounded-[2.5rem] overflow-hidden shadow-sm border border-neutral-100 hover:shadow-2xl transition-all duration-500"
                       >
                         <motion.div
