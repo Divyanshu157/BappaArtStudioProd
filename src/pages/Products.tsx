@@ -1,7 +1,7 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { PRODUCTS } from '@/src/data';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import { ArrowRight, Filter, Search } from 'lucide-react';
 import { cn } from '@/src/lib/utils';
 import Layout from '@/src/components/layout/Layout';

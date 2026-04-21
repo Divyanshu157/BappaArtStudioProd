@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import Hero from '@/src/components/sections/Hero';
 import { PRODUCTS } from '@/src/data';
@@ -10,7 +10,7 @@ import { Reveal } from '@/src/components/ui/Reveal';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
-  const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const featuredProducts = useMemo(() => {
     return [...PRODUCTS].sort(() => Math.random() - 0.5).slice(0, 4);
   }, []);
@@ -114,7 +114,7 @@ const Home = () => {
                   ].map((cat, i) => (
                     <Reveal key={i} delay={i * 0.08}>
                       <Link 
-                        to="/products"
+                        to={`/products?category=${cat.name}`}
                         className="group relative flex-shrink-0 w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
                       >
                         {/* Image */}
@@ -161,7 +161,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 4: FEATURED PRODUCTS */}
-          <section className="py-24 px-6 bg-white" aria-labelledby="featured-work-title">
+          <section className="py-16 px-6 bg-white" aria-labelledby="featured-work-title">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <Reveal direction="right">
@@ -174,7 +174,7 @@ const Home = () => {
                   </div>
                 </Reveal>
                 <Reveal direction="left">
-                  <Link to="/products" className="flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all group">
+                  <Link to={`/products?category=${cat.name}`} className="flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all group">
                     View Full Gallery <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                   </Link>
                 </Reveal>
@@ -445,7 +445,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 9: GLOBAL SHIPPING & EXPORT TRUST */}
-          <section className="py-24 px-6 bg-white" aria-labelledby="shipping-title">
+          <section className="py-16 px-6 bg-white" aria-labelledby="shipping-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
                 <div className="text-center mb-16">
@@ -483,76 +483,8 @@ const Home = () => {
             </div>
           </section>
 
-          {/* SECTION 10: FAQ */}
-          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="faq-title">
-            <div className="max-w-4xl mx-auto">
-              <Reveal>
-                <div className="text-center mb-20">
-                  <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Common Questions</span>
-                  <h2 id="faq-title" className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h2>
-                  <p className="text-neutral-600 text-lg">
-                    Everything you need to know about our sculptures, customization, and ordering process.
-                  </p>
-                </div>
-              </Reveal>
-
-              <div className="space-y-4">
-                {[
-                  {
-                    q: "How do I customize a sculpture?",
-                    a: "Contact our team with your vision. We'll work with you on size, pose, materials, and details. Expect 4-8 weeks for completion depending on complexity."
-                  },
-                  {
-                    q: "What marble do you use?",
-                    a: "We exclusively use premium Makrana and Sangemarmar marble from Rajasthan. No substitutes. Every piece meets our rigorous quality standards."
-                  },
-                  {
-                    q: "Do you ship internationally?",
-                    a: "Yes! We ship to 50+ countries. International orders include custom wooden crates, insurance, and full customs documentation."
-                  },
-                  {
-                    q: "Can you restore old sculptures?",
-                    a: "Yes. We offer expert heritage restoration with reverence for the original craftsmanship. Contact us with photos and details."
-                  },
-                  {
-                    q: "What's the size range for sculptures?",
-                    a: "We create pieces from 6 inches to 8+ feet. Custom sizes available for home altars, temple installations, or public spaces."
-                  },
-                  {
-                    q: "Do you offer payment plans?",
-                    a: "Yes. We accommodate bulk and large custom orders with flexible payment terms. Contact our sales team for details."
-                  }
-                ].map((item, i) => (
-                  <Reveal key={i} delay={i * 0.05}>
-                    <button
-                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                      className="w-full text-left p-6 bg-white rounded-[1.5rem] border border-neutral-100 hover:border-accent hover:shadow-md transition-all"
-                    >
-                      <div className="flex justify-between items-start gap-4">
-                        <h3 className="font-bold text-lg text-neutral-900">{item.q}</h3>
-                        <span className={`text-accent text-2xl shrink-0 transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
-                      </div>
-                      {openFaq === i && (
-                        <p className="text-neutral-600 mt-4 leading-relaxed">{item.a}</p>
-                      )}
-                    </button>
-                  </Reveal>
-                ))}
-              </div>
-
-              <Reveal>
-                <div className="mt-12 p-8 bg-accent/10 rounded-[2rem] border border-accent/20 text-center">
-                  <p className="text-neutral-700 mb-4">Can't find your answer? Our team is here to help.</p>
-                  <Link to="/contact" className="text-accent font-bold hover:underline inline-flex items-center gap-2">
-                    Get in Touch <ArrowRight size={20} />
-                  </Link>
-                </div>
-              </Reveal>
-            </div>
-          </section>
-
-          {/* SECTION 11: FINAL CTA */}
-          <section className="py-24 px-6">
+          {/* SECTION 10: FINAL CTA */}
+          <section className="py-16 px-6">
             <Reveal>
               <div className="max-w-7xl mx-auto bg-accent rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-accent/20">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
@@ -567,7 +499,7 @@ const Home = () => {
                     <Link to="/contact" className="w-full sm:w-auto px-8 py-6 bg-black text-white font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
                       Request Custom Sculpture
                     </Link>
-                    <Link to="/products" className="w-full sm:w-auto px-8 py-6 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
+                    <Link to={`/products?category=${cat.name}`} className="w-full sm:w-auto px-8 py-6 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
                       Browse Our Gallery
                     </Link>
                   </div>
