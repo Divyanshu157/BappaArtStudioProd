@@ -1,15 +1,16 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { motion } from 'motion/react';
 import Hero from '@/src/components/sections/Hero';
 import { PRODUCTS } from '@/src/data';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Star, Shield, Hammer, Sparkles, Quote, CheckCircle2 } from 'lucide-react';
+import { ArrowRight, Star, Shield, Hammer, Sparkles, Quote, CheckCircle2, Globe, Zap, Users, Truck, HelpCircle, Award } from 'lucide-react';
 import Layout from '@/src/components/layout/Layout';
 import PageTransition from '@/src/components/layout/PageTransition';
 import { Reveal } from '@/src/components/ui/Reveal';
 import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
   const featuredProducts = useMemo(() => {
     return [...PRODUCTS].sort(() => Math.random() - 0.5).slice(0, 4);
   }, []);
@@ -18,24 +19,95 @@ const Home = () => {
     <Layout transparentNavbar>
       <Helmet>
         <title>Bappa Art Studio - Premium Marble Sculptures & Divine Artistry</title>
-        <meta name="description" content="Discover Bappa Art Studio's premium marble sculptures. Over 50 years of divine artistry, custom sculptures, heritage restoration, and spiritual art from Jaipur, India." />
-        <meta name="keywords" content="marble sculptures, divine art, Bappa Art Studio, Jaipur, custom sculptures, heritage restoration, spiritual art" />
+        <meta name="description" content="Discover Bappa Art Studio's premium marble sculptures. Over 50 years of divine artistry, custom sculptures, heritage restoration, and spiritual art from Jaipur, India. Worldwide shipping available." />
+        <meta name="keywords" content="marble sculptures, divine art, Bappa Art Studio, Jaipur, custom sculptures, heritage restoration, spiritual art, marble idols" />
         <link rel="canonical" href="https://www.bappaartstudio.com/" />
       </Helmet>
       <PageTransition>
         <div className="flex flex-col">
+          {/* SECTION 1: HERO WITH PROPER H1 */}
           <Hero />
+          
+          {/* SECTION 2: TRUST SIGNALS BAR */}
+          <section className="py-8 px-6 bg-white border-b border-neutral-100">
+            <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+              <Reveal>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-accent mb-2">50+</p>
+                  <p className="text-sm text-neutral-600 font-medium">Years of Craftsmanship</p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-accent mb-2">1000+</p>
+                  <p className="text-sm text-neutral-600 font-medium">Satisfied Customers</p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.2}>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-accent mb-2">50+</p>
+                  <p className="text-sm text-neutral-600 font-medium">Countries Served</p>
+                </div>
+              </Reveal>
+              <Reveal delay={0.3}>
+                <div>
+                  <p className="text-3xl md:text-4xl font-bold text-accent mb-2">100%</p>
+                  <p className="text-sm text-neutral-600 font-medium">Premium Marble</p>
+                </div>
+              </Reveal>
+            </div>
+          </section>
 
-          {/* Featured Work */}
-          <section className="py-24 px-6 bg-neutral-100" aria-labelledby="featured-work-title">
+          {/* SECTION 3: FEATURED CATEGORIES */}
+          <section className="py-24 px-6 bg-neutral-50" aria-labelledby="categories-title">
+            <div className="max-w-7xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-16">
+                  <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Divine Collection</span>
+                  <h2 id="categories-title" className="text-4xl md:text-5xl font-bold mb-6">Explore by Divine Form</h2>
+                  <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
+                    Every deity carries unique spiritual significance. Browse our curated categories to find the perfect divine sculpture for your home or temple.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  { name: "Ganesha", desc: "Remover of obstacles, new beginnings", icon: "🙏" },
+                  { name: "Radha Krishna", desc: "Divine love and eternal devotion", icon: "💕" },
+                  { name: "Shiva", desc: "Lord of meditation and transformation", icon: "✨" },
+                  { name: "Ram", desc: "Symbol of dharma and righteousness", icon: "⚔️" },
+                  { name: "Durga", desc: "Goddess of strength and protection", icon: "👑" },
+                  { name: "Saraswati", desc: "Wisdom, knowledge, and arts", icon: "📚" }
+                ].map((cat, i) => (
+                  <Reveal key={i} delay={i * 0.05}>
+                    <Link 
+                      to="/products"
+                      className="group p-8 bg-white rounded-[2rem] border border-neutral-100 hover:border-accent hover:shadow-lg transition-all"
+                    >
+                      <div className="text-4xl mb-4">{cat.icon}</div>
+                      <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{cat.name}</h3>
+                      <p className="text-neutral-500 text-sm mb-4">{cat.desc}</p>
+                      <div className="text-accent text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
+                        Explore <ArrowRight size={16} />
+                      </div>
+                    </Link>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 4: FEATURED PRODUCTS */}
+          <section className="py-24 px-6 bg-white" aria-labelledby="featured-work-title">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
                 <Reveal direction="right">
                   <div className="max-w-2xl">
-                    <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Exquisite Collection</span>
+                    <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Best Sellers</span>
                     <h2 id="featured-work-title" className="text-4xl md:text-5xl font-bold mb-6">Featured Masterpieces</h2>
                     <p className="text-neutral-600 text-lg">
-                      A glimpse into our world of divine marble artistry, where every piece tells a story of devotion and meticulous craftsmanship.
+                      Handpicked sculptures that embody our finest craftsmanship. Each piece is a testament to centuries-old traditions and modern artistry.
                     </p>
                   </div>
                 </Reveal>
@@ -51,12 +123,12 @@ const Home = () => {
                   <Reveal key={product.id} delay={i * 0.1}>
                     <Link 
                       to={`/products/${product.slug}`}
-                      className="group relative block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 h-full"
+                      className="group relative block bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl transition-all duration-500 h-full border border-neutral-100"
                     >
                       <div className="aspect-[4/5] overflow-hidden">
                         <img 
                           src={product.imageUrl} 
-                          alt={product.title}
+                          alt={`${product.title} - ${product.category} marble sculpture`}
                           loading="lazy"
                           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                         />
@@ -77,15 +149,15 @@ const Home = () => {
             </div>
           </section>
 
-          {/* Legacy Section */}
-          <section className="py-32 px-6 bg-white" aria-labelledby="legacy-title">
+          {/* SECTION 5: HERITAGE & LEGACY */}
+          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="legacy-title">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <Reveal direction="right">
                 <div className="relative">
                   <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl w-[90%] max-w-[40rem] h-[34rem] mx-auto">
                     <img 
                       src="/assets/images/Priyanshu.png" 
-                      alt="Craftsman at work"
+                      alt="Master craftsman sculpting marble at Bappa Art Studio workshop"
                       loading="lazy"
                       className="w-full h-full object-cover"
                     />
@@ -101,7 +173,7 @@ const Home = () => {
               <div className="space-y-8">
                 <Reveal direction="left">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs">Our Heritage</span>
-                  <h2 className="text-4xl md:text-6xl font-bold leading-tight">Crafting Devotion Through Generations</h2>
+                  <h2 id="legacy-title" className="text-4xl md:text-6xl font-bold leading-tight">Crafting Devotion Through Generations</h2>
                   <p className="text-xl text-neutral-600 leading-relaxed">
                     For over five decades, Bappa Art Studio has been a sanctuary of spiritual artistry. We don't just carve stone; we breathe life into marble, preserving ancient traditions while embracing modern aesthetics.
                   </p>
@@ -113,7 +185,7 @@ const Home = () => {
                         <Star size={28} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-lg mb-2">Purity of Stone</h4>
+                        <h3 className="font-bold text-lg mb-2">Purity of Stone</h3>
                         <p className="text-sm text-neutral-500 leading-relaxed">We source only the finest Makrana and Sangemarmar marble for eternal radiance.</p>
                       </div>
                     </div>
@@ -124,7 +196,7 @@ const Home = () => {
                         <Shield size={28} />
                       </div>
                       <div>
-                        <h4 className="font-bold text-lg mb-2">Vedic Precision</h4>
+                        <h3 className="font-bold text-lg mb-2">Vedic Precision</h3>
                         <p className="text-sm text-neutral-500 leading-relaxed">Our sculptures adhere to sacred proportions and ancient Vastu principles.</p>
                       </div>
                     </div>
@@ -132,7 +204,7 @@ const Home = () => {
                 </div>
                 <Reveal direction="left" delay={0.5}>
                   <div className="pt-8">
-                    <Link to="/vision-values" className="px-10 py-5 bg-neutral-900 text-white font-bold rounded-full hover:bg-accent hover:text-black transition-all shadow-xl">
+                    <Link to="/vision-values" className="px-10 py-5 bg-neutral-900 text-white font-bold rounded-full hover:bg-accent hover:text-black transition-all shadow-xl inline-block">
                       Our Vision & Values
                     </Link>
                   </div>
@@ -141,14 +213,74 @@ const Home = () => {
             </div>
           </section>
 
-          {/* The Sacred Journey (Process) */}
-          <section className="py-32 px-6 bg-neutral-950 text-white relative overflow-hidden">
+          {/* SECTION 6: WHY CHOOSE US (Trust Section) */}
+          <section className="py-32 px-6 bg-white" aria-labelledby="why-choose-title">
+            <div className="max-w-7xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-20">
+                  <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Why Choose Bappa</span>
+                  <h2 id="why-choose-title" className="text-4xl md:text-6xl font-bold mb-6">What Sets Us Apart</h2>
+                  <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
+                    In a world of mass production, we stand as guardians of authentic craftsmanship and spiritual excellence.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {[
+                  {
+                    icon: <Award size={32} />,
+                    title: "Jaipur Heritage Masters",
+                    desc: "Rooted in Jaipur's legendary marble craftsmanship tradition with 50+ years of expertise."
+                  },
+                  {
+                    icon: <Zap size={32} />,
+                    title: "100% Custom Creations",
+                    desc: "Every sculpture is handcrafted to your exact vision—size, pose, details, and spiritual intent."
+                  },
+                  {
+                    icon: <Globe size={32} />,
+                    title: "Global Shipping",
+                    desc: "Safely delivered to 50+ countries with secure packaging and international logistics expertise."
+                  },
+                  {
+                    icon: <Star size={32} />,
+                    title: "Premium Marble Only",
+                    desc: "We exclusively use Makrana and Sangemarmar marble—no compromises on material quality."
+                  },
+                  {
+                    icon: <Shield size={32} />,
+                    title: "Heritage Restoration",
+                    desc: "Expert restoration of ancient sculptures and temple installations with reverence and precision."
+                  },
+                  {
+                    icon: <Users size={32} />,
+                    title: "1000+ Happy Customers",
+                    desc: "Trusted by temples, collectors, and homes worldwide for our dedication to excellence."
+                  }
+                ].map((item, i) => (
+                  <Reveal key={i} delay={i * 0.05}>
+                    <div className="p-8 bg-neutral-50 rounded-[2rem] border border-neutral-100 hover:border-accent hover:shadow-lg transition-all">
+                      <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-6">
+                        {item.icon}
+                      </div>
+                      <h3 className="text-xl font-bold mb-3">{item.title}</h3>
+                      <p className="text-neutral-600 leading-relaxed">{item.desc}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 7: CRAFTSMANSHIP PROCESS */}
+          <section className="py-32 px-6 bg-neutral-950 text-white relative overflow-hidden" aria-labelledby="process-title">
             <div className="absolute top-0 left-0 w-full h-full bg-grid opacity-10" />
             <div className="max-w-7xl mx-auto relative z-10">
               <Reveal>
                 <div className="text-center mb-24">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">The Sacred Journey</span>
-                  <h2 className="text-4xl md:text-6xl font-bold mb-8">How Divinity Takes Form</h2>
+                  <h2 id="process-title" className="text-4xl md:text-6xl font-bold mb-8">How Divinity Takes Form</h2>
                   <p className="text-neutral-400 max-w-3xl mx-auto text-lg">
                     Every masterpiece at Bappa Art Studio undergoes a meditative journey from a raw block of stone to a radiant divine form.
                   </p>
@@ -195,13 +327,13 @@ const Home = () => {
             </div>
           </section>
 
-          {/* Testimonials */}
-          <section className="py-32 px-6 bg-neutral-50">
+          {/* SECTION 8: TESTIMONIALS */}
+          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="testimonials-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
                 <div className="text-center mb-20">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Client Stories</span>
-                  <h2 className="text-4xl md:text-5xl font-bold">Voices of Devotion</h2>
+                  <h2 id="testimonials-title" className="text-4xl md:text-5xl font-bold">Voices of Devotion</h2>
                 </div>
               </Reveal>
 
@@ -250,7 +382,114 @@ const Home = () => {
             </div>
           </section>
 
-          {/* CTA Section */}
+          {/* SECTION 9: GLOBAL SHIPPING & EXPORT TRUST */}
+          <section className="py-24 px-6 bg-white" aria-labelledby="shipping-title">
+            <div className="max-w-7xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-16">
+                  <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Worldwide Delivery</span>
+                  <h2 id="shipping-title" className="text-4xl md:text-5xl font-bold mb-6">Shipping to 50+ Countries</h2>
+                  <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
+                    From Jaipur to the world. We handle secure international packaging, customs, and logistics for worry-free delivery.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <Reveal>
+                  <div className="text-center p-8">
+                    <div className="text-5xl mb-4">🌍</div>
+                    <h3 className="text-xl font-bold mb-3">Global Reach</h3>
+                    <p className="text-neutral-600">Safe delivery to North America, Europe, Middle East, Southeast Asia, and more.</p>
+                  </div>
+                </Reveal>
+                <Reveal delay={0.1}>
+                  <div className="text-center p-8">
+                    <div className="text-5xl mb-4">📦</div>
+                    <h3 className="text-xl font-bold mb-3">Premium Packaging</h3>
+                    <p className="text-neutral-600">Custom wooden crates and protective padding ensure your sculpture arrives perfect.</p>
+                  </div>
+                </Reveal>
+                <Reveal delay={0.2}>
+                  <div className="text-center p-8">
+                    <div className="text-5xl mb-4">✅</div>
+                    <h3 className="text-xl font-bold mb-3">Customs Ready</h3>
+                    <p className="text-neutral-600">All documentation prepared for seamless international customs clearance.</p>
+                  </div>
+                </Reveal>
+              </div>
+            </div>
+          </section>
+
+          {/* SECTION 10: FAQ */}
+          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="faq-title">
+            <div className="max-w-4xl mx-auto">
+              <Reveal>
+                <div className="text-center mb-20">
+                  <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Common Questions</span>
+                  <h2 id="faq-title" className="text-4xl md:text-5xl font-bold mb-6">Frequently Asked Questions</h2>
+                  <p className="text-neutral-600 text-lg">
+                    Everything you need to know about our sculptures, customization, and ordering process.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="space-y-4">
+                {[
+                  {
+                    q: "How do I customize a sculpture?",
+                    a: "Contact our team with your vision. We'll work with you on size, pose, materials, and details. Expect 4-8 weeks for completion depending on complexity."
+                  },
+                  {
+                    q: "What marble do you use?",
+                    a: "We exclusively use premium Makrana and Sangemarmar marble from Rajasthan. No substitutes. Every piece meets our rigorous quality standards."
+                  },
+                  {
+                    q: "Do you ship internationally?",
+                    a: "Yes! We ship to 50+ countries. International orders include custom wooden crates, insurance, and full customs documentation."
+                  },
+                  {
+                    q: "Can you restore old sculptures?",
+                    a: "Yes. We offer expert heritage restoration with reverence for the original craftsmanship. Contact us with photos and details."
+                  },
+                  {
+                    q: "What's the size range for sculptures?",
+                    a: "We create pieces from 6 inches to 8+ feet. Custom sizes available for home altars, temple installations, or public spaces."
+                  },
+                  {
+                    q: "Do you offer payment plans?",
+                    a: "Yes. We accommodate bulk and large custom orders with flexible payment terms. Contact our sales team for details."
+                  }
+                ].map((item, i) => (
+                  <Reveal key={i} delay={i * 0.05}>
+                    <button
+                      onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                      className="w-full text-left p-6 bg-white rounded-[1.5rem] border border-neutral-100 hover:border-accent hover:shadow-md transition-all"
+                    >
+                      <div className="flex justify-between items-start gap-4">
+                        <h3 className="font-bold text-lg text-neutral-900">{item.q}</h3>
+                        <span className={`text-accent text-2xl shrink-0 transition-transform ${openFaq === i ? 'rotate-45' : ''}`}>+</span>
+                      </div>
+                      {openFaq === i && (
+                        <p className="text-neutral-600 mt-4 leading-relaxed">{item.a}</p>
+                      )}
+                    </button>
+                  </Reveal>
+                ))}
+              </div>
+
+              <Reveal>
+                <div className="mt-12 p-8 bg-accent/10 rounded-[2rem] border border-accent/20 text-center">
+                  <p className="text-neutral-700 mb-4">Can't find your answer? Our team is here to help.</p>
+                  <Link to="/contact" className="text-accent font-bold hover:underline inline-flex items-center gap-2">
+                    Get in Touch <ArrowRight size={20} />
+                  </Link>
+                </div>
+              </Reveal>
+            </div>
+          </section>
+
+          {/* SECTION 11: FINAL CTA */}
           <section className="py-24 px-6">
             <Reveal>
               <div className="max-w-7xl mx-auto bg-accent rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-accent/20">
@@ -260,14 +499,14 @@ const Home = () => {
                 <div className="relative z-10 max-w-3xl mx-auto">
                   <h2 className="text-4xl md:text-6xl font-bold text-black mb-8 leading-tight">Bring Home a Masterpiece of Devotion</h2>
                   <p className="text-black/70 text-xl mb-12 font-medium">
-                    Whether you need a custom moorti for your home or a grand installation for a temple, our artisans are ready to bring your vision to life.
+                    Whether you need a custom moorti for your home, a grand installation for a temple, or restoration of a heritage piece, our artisans are ready to serve you with devotion and excellence.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-4 justify-center">
                     <Link to="/contact" className="w-full sm:w-auto px-8 py-6 bg-black text-white font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
-                      Contact Us Today
+                      Request Custom Sculpture
                     </Link>
                     <Link to="/products" className="w-full sm:w-auto px-8 py-6 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
-                      Browse Gallery
+                      Browse Our Gallery
                     </Link>
                   </div>
                 </div>
