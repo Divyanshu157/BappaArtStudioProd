@@ -59,37 +59,95 @@ const Home = () => {
           </section>
 
           {/* SECTION 3: FEATURED CATEGORIES */}
-          <section className="py-24 px-6 bg-neutral-50" aria-labelledby="categories-title">
+          <section className="py-32 px-6 bg-white" aria-labelledby="categories-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
-                <div className="text-center mb-16">
+                <div className="text-center mb-20">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Divine Collection</span>
-                  <h2 id="categories-title" className="text-4xl md:text-5xl font-bold mb-6">Explore by Divine Form</h2>
-                  <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
-                    Every deity carries unique spiritual significance. Browse our curated categories to find the perfect divine sculpture for your home or temple.
+                  <h2 id="categories-title" className="text-4xl md:text-6xl font-bold mb-8">Browse Divine Forms</h2>
+                  <p className="text-neutral-600 text-lg max-w-3xl mx-auto leading-relaxed">
+                    Every deity carries unique spiritual significance. Explore our curated collection of handcrafted marble sculptures for every sacred purpose.
                   </p>
                 </div>
               </Reveal>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {[
-                  { name: "Ganesha", desc: "Remover of obstacles, new beginnings", icon: "🙏" },
-                  { name: "Radha Krishna", desc: "Divine love and eternal devotion", icon: "💕" },
-                  { name: "Shiva", desc: "Lord of meditation and transformation", icon: "✨" },
-                  { name: "Ram", desc: "Symbol of dharma and righteousness", icon: "⚔️" },
-                  { name: "Durga", desc: "Goddess of strength and protection", icon: "👑" },
-                  { name: "Saraswati", desc: "Wisdom, knowledge, and arts", icon: "📚" }
+                  { 
+                    name: "Ganesha", 
+                    desc: "Remover of obstacles, prosperity, and new beginnings", 
+                    count: "7 Designs",
+                    icon: "🙏"
+                  },
+                  { 
+                    name: "Radha Krishna", 
+                    desc: "Divine love, eternal devotion, and celestial romance", 
+                    count: "8 Designs",
+                    icon: "💕"
+                  },
+                  { 
+                    name: "Shiva", 
+                    desc: "Meditation, transformation, and cosmic consciousness", 
+                    count: "3 Designs",
+                    icon: "✨"
+                  },
+                  { 
+                    name: "Ram", 
+                    desc: "Dharma, righteousness, and divine leadership", 
+                    count: "3 Designs",
+                    icon: "⚔️"
+                  },
+                  { 
+                    name: "Durga", 
+                    desc: "Goddess of strength, protection, and victory", 
+                    count: "3 Designs",
+                    icon: "👑"
+                  },
+                  { 
+                    name: "Saraswati", 
+                    desc: "Wisdom, knowledge, music, and creative arts", 
+                    count: "2 Designs",
+                    icon: "📚"
+                  }
                 ].map((cat, i) => (
-                  <Reveal key={i} delay={i * 0.05}>
+                  <Reveal key={i} delay={i * 0.08}>
                     <Link 
                       to="/products"
-                      className="group p-8 bg-white rounded-[2rem] border border-neutral-100 hover:border-accent hover:shadow-lg transition-all"
+                      className="group relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-50 to-white border border-neutral-100 hover:border-accent transition-all duration-300 h-full flex flex-col p-10 shadow-sm hover:shadow-xl"
                     >
-                      <div className="text-4xl mb-4">{cat.icon}</div>
-                      <h3 className="text-xl font-bold mb-2 group-hover:text-accent transition-colors">{cat.name}</h3>
-                      <p className="text-neutral-500 text-sm mb-4">{cat.desc}</p>
-                      <div className="text-accent text-sm font-bold flex items-center gap-2 group-hover:gap-3 transition-all">
-                        Explore <ArrowRight size={16} />
+                      {/* Background accent */}
+                      <div className="absolute -top-8 -right-8 w-24 h-24 bg-accent/5 rounded-full group-hover:scale-150 transition-transform duration-500" />
+                      <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-accent/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      <div className="relative z-10">
+                        {/* Icon */}
+                        <div className="text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
+                          {cat.icon}
+                        </div>
+                        
+                        {/* Name */}
+                        <h3 className="text-2xl font-bold text-neutral-900 mb-3 group-hover:text-accent transition-colors">
+                          {cat.name}
+                        </h3>
+                        
+                        {/* Description */}
+                        <p className="text-neutral-600 text-sm leading-relaxed mb-6 line-clamp-2 group-hover:text-neutral-700 transition-colors">
+                          {cat.desc}
+                        </p>
+                        
+                        {/* Count */}
+                        <div className="mb-6">
+                          <span className="inline-block text-xs font-bold text-accent bg-accent/10 px-4 py-2 rounded-full">
+                            {cat.count}
+                          </span>
+                        </div>
+                      </div>
+                      
+                      {/* CTA */}
+                      <div className="relative z-10 mt-auto">
+                        <div className="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-4 transition-all">
+                          Explore <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                        </div>
                       </div>
                     </Link>
                   </Reveal>
