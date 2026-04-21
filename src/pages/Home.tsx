@@ -114,7 +114,7 @@ const Home = () => {
                   ].map((cat, i) => (
                     <Reveal key={i} delay={i * 0.08}>
                       <Link 
-                        to={`/products?category=${cat.name}`}
+                        to="/products"
                         className="group relative flex-shrink-0 w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
                       >
                         {/* Image */}
@@ -174,7 +174,7 @@ const Home = () => {
                   </div>
                 </Reveal>
                 <Reveal direction="left">
-                  <Link to={`/products?category=${cat.name}`} className="flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all group">
+                  <Link to="/products" className="flex items-center gap-2 text-accent font-bold hover:gap-4 transition-all group">
                     View Full Gallery <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
                   </Link>
                 </Reveal>
@@ -499,7 +499,7 @@ const Home = () => {
                     <Link to="/contact" className="w-full sm:w-auto px-8 py-6 bg-black text-white font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
                       Request Custom Sculpture
                     </Link>
-                    <Link to={`/products?category=${cat.name}`} className="w-full sm:w-auto px-8 py-6 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
+                    <Link to="/products" className="w-full sm:w-auto px-8 py-6 bg-white text-black font-bold rounded-full hover:scale-105 transition-transform shadow-xl text-center">
                       Browse Our Gallery
                     </Link>
                   </div>
