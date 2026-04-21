@@ -58,100 +58,104 @@ const Home = () => {
             </div>
           </section>
 
-          {/* SECTION 3: FEATURED CATEGORIES */}
-          <section className="py-32 px-6 bg-white" aria-labelledby="categories-title">
+          {/* SECTION 3: FEATURED CATEGORIES - HORIZONTAL SCROLL */}
+          <section className="py-20 px-6 bg-white" aria-labelledby="categories-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
-                <div className="text-center mb-20">
+                <div className="text-center mb-12">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Divine Collection</span>
-                  <h2 id="categories-title" className="text-4xl md:text-6xl font-bold mb-8">Browse Divine Forms</h2>
-                  <p className="text-neutral-600 text-lg max-w-3xl mx-auto leading-relaxed">
-                    Every deity carries unique spiritual significance. Explore our curated collection of handcrafted marble sculptures for every sacred purpose.
+                  <h2 id="categories-title" className="text-4xl md:text-5xl font-bold mb-6">Browse Divine Forms</h2>
+                  <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
+                    Every deity carries unique spiritual significance. Explore our curated collection of handcrafted marble sculptures.
                   </p>
                 </div>
               </Reveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {[
-                  { 
-                    name: "Ganesha", 
-                    desc: "Remover of obstacles, prosperity, and new beginnings", 
-                    count: "7 Designs",
-                    icon: "🙏"
-                  },
-                  { 
-                    name: "Radha Krishna", 
-                    desc: "Divine love, eternal devotion, and celestial romance", 
-                    count: "8 Designs",
-                    icon: "💕"
-                  },
-                  { 
-                    name: "Shiva", 
-                    desc: "Meditation, transformation, and cosmic consciousness", 
-                    count: "3 Designs",
-                    icon: "✨"
-                  },
-                  { 
-                    name: "Ram", 
-                    desc: "Dharma, righteousness, and divine leadership", 
-                    count: "3 Designs",
-                    icon: "⚔️"
-                  },
-                  { 
-                    name: "Durga", 
-                    desc: "Goddess of strength, protection, and victory", 
-                    count: "3 Designs",
-                    icon: "👑"
-                  },
-                  { 
-                    name: "Saraswati", 
-                    desc: "Wisdom, knowledge, music, and creative arts", 
-                    count: "2 Designs",
-                    icon: "📚"
-                  }
-                ].map((cat, i) => (
-                  <Reveal key={i} delay={i * 0.08}>
-                    <Link 
-                      to="/products"
-                      className="group relative overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-neutral-50 to-white border border-neutral-100 hover:border-accent transition-all duration-300 h-full flex flex-col p-10 shadow-sm hover:shadow-xl"
-                    >
-                      {/* Background accent */}
-                      <div className="absolute -top-8 -right-8 w-24 h-24 bg-accent/5 rounded-full group-hover:scale-150 transition-transform duration-500" />
-                      <div className="absolute -bottom-8 -left-8 w-20 h-20 bg-accent/10 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                      
-                      <div className="relative z-10">
-                        {/* Icon */}
-                        <div className="text-6xl mb-6 group-hover:scale-110 group-hover:rotate-6 transition-transform duration-300">
-                          {cat.icon}
+              <div className="relative">
+                {/* Scrollable container */}
+                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory">
+                  {[
+                    { 
+                      name: "Ganesha", 
+                      desc: "Remover of obstacles, prosperity, and new beginnings", 
+                      count: "7+ Designs",
+                      image: "/assets/images/ganesh/g1.jpeg"
+                    },
+                    { 
+                      name: "Radha Krishna", 
+                      desc: "Divine love, eternal devotion, and celestial romance", 
+                      count: "7+ Designs",
+                      image: "/assets/images/radha-krishna/rk1.jpeg"
+                    },
+                    { 
+                      name: "Shiva", 
+                      desc: "Meditation, transformation, and cosmic consciousness", 
+                      count: "1+ Designs",
+                      image: "/assets/images/shiva/m1.jpeg"
+                    },
+                    { 
+                      name: "Ram", 
+                      desc: "Dharma, righteousness, and divine leadership", 
+                      count: "3+ Designs",
+                      image: "/assets/images/ram/r1.jpeg"
+                    },
+                    { 
+                      name: "Durga", 
+                      desc: "Goddess of strength, protection, and victory", 
+                      count: "3+ Designs",
+                      image: "/assets/images/durga/d1.jpeg"
+                    },
+                    { 
+                      name: "Saraswati", 
+                      desc: "Wisdom, knowledge, music, and creative arts", 
+                      count: "2+ Designs",
+                      image: "/assets/images/saraswati/s1.jpeg"
+                    }
+                  ].map((cat, i) => (
+                    <Reveal key={i} delay={i * 0.08}>
+                      <Link 
+                        to="/products"
+                        className="group relative flex-shrink-0 w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
+                      >
+                        {/* Image */}
+                        <div className="aspect-[4/5] overflow-hidden relative">
+                          <img 
+                            src={cat.image} 
+                            alt={`${cat.name} marble sculpture category`}
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                            loading="lazy"
+                          />
+                          <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                          
+                          {/* Count badge */}
+                          <div className="absolute top-4 left-4">
+                            <span className="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full">
+                              {cat.count}
+                            </span>
+                          </div>
                         </div>
                         
-                        {/* Name */}
-                        <h3 className="text-2xl font-bold text-neutral-900 mb-3 group-hover:text-accent transition-colors">
-                          {cat.name}
-                        </h3>
-                        
-                        {/* Description */}
-                        <p className="text-neutral-600 text-sm leading-relaxed mb-6 line-clamp-2 group-hover:text-neutral-700 transition-colors">
-                          {cat.desc}
-                        </p>
-                        
-                        {/* Count */}
-                        <div className="mb-6">
-                          <span className="inline-block text-xs font-bold text-accent bg-accent/10 px-4 py-2 rounded-full">
-                            {cat.count}
-                          </span>
+                        {/* Content */}
+                        <div className="p-6">
+                          <h3 className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent transition-colors">
+                            {cat.name}
+                          </h3>
+                          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                            {cat.desc}
+                          </p>
+                          <div className="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                            Explore <ArrowRight size={16} />
+                          </div>
                         </div>
-                      </div>
-                      
-                      {/* CTA */}
-                      <div className="relative z-10 mt-auto">
-                        <div className="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-4 transition-all">
-                          Explore <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-                        </div>
-                      </div>
-                    </Link>
-                  </Reveal>
-                ))}
+                      </Link>
+                    </Reveal>
+                  ))}
+                </div>
+                
+                {/* Scroll indicators */}
+                <div className="flex justify-center mt-6 gap-2">
+                  <div className="text-xs text-neutral-400">← Scroll to explore more categories →</div>
+                </div>
               </div>
             </div>
           </section>
@@ -208,7 +212,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 5: HERITAGE & LEGACY */}
-          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="legacy-title">
+          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="legacy-title">
             <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
               <Reveal direction="right">
                 <div className="relative">
@@ -272,7 +276,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 6: WHY CHOOSE US (Trust Section) */}
-          <section className="py-32 px-6 bg-white" aria-labelledby="why-choose-title">
+          <section className="py-20 px-6 bg-white" aria-labelledby="why-choose-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
                 <div className="text-center mb-20">
@@ -332,7 +336,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 7: CRAFTSMANSHIP PROCESS */}
-          <section className="py-32 px-6 bg-neutral-950 text-white relative overflow-hidden" aria-labelledby="process-title">
+          <section className="py-20 px-6 bg-neutral-950 text-white relative overflow-hidden" aria-labelledby="process-title">
             <div className="absolute top-0 left-0 w-full h-full bg-grid opacity-10" />
             <div className="max-w-7xl mx-auto relative z-10">
               <Reveal>
@@ -386,7 +390,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 8: TESTIMONIALS */}
-          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="testimonials-title">
+          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="testimonials-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
                 <div className="text-center mb-20">
@@ -480,7 +484,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 10: FAQ */}
-          <section className="py-32 px-6 bg-neutral-50" aria-labelledby="faq-title">
+          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="faq-title">
             <div className="max-w-4xl mx-auto">
               <Reveal>
                 <div className="text-center mb-20">
