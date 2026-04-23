@@ -72,7 +72,9 @@ const Home = () => {
                 </div>
               </Reveal>
 
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0">
+              <div className="relative">
+                {/* Scrollable container */}
+                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
                   {[
                     { 
                       name: "Ganesha", 
@@ -114,11 +116,7 @@ const Home = () => {
                     <Reveal key={i} delay={i * 0.08}>
                       <Link 
                         to="/products"
-                        className={
-                          `group relative flex-shrink-0 w-full overflow-hidden rounded-none md:rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl ${
-                            i % 6 === 0 ? 'ml-0 mr-2' : i % 6 === 5 ? 'mr-0 ml-2' : 'mx-2'
-                          }`
-                        }
+                        className="group relative flex-shrink-0 w-72 md:w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
                       >
                         {/* Image */}
                         <div className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative">
@@ -154,7 +152,12 @@ const Home = () => {
                     </Reveal>
                   ))}
                 </div>
+                {/* Scroll indicators */}
+                <div className="flex justify-center mt-2 gap-2">
+                  <div className="text-xs text-neutral-400">← Scroll to explore more categories →</div>
+                </div>
               </div>
+            </div> 
           </section>
 
           {/* SECTION 4: FEATURED PRODUCTS */}
