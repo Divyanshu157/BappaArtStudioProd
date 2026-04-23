@@ -24,6 +24,7 @@ const slides = [
 
 const Hero = () => {
   const [current, setCurrent] = useState(0);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
 
   const next = () => setCurrent((prev) => (prev + 1) % slides.length);
   const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
@@ -34,8 +35,31 @@ const Hero = () => {
     return () => clearInterval(timer);
   }, []);
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart(e.touches[0].clientX);
+  };
+
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (touchStart === null) return;
+    
+    const touchEnd = e.changedTouches[0].clientX;
+    const diff = touchStart - touchEnd;
+    
+    if (Math.abs(diff) > 50) {
+      if (diff > 0) next();
+      else prev();
+    }
+    
+    setTouchStart(null);
+  };
+
   return (
-    <section className="relative h-screen w-full overflow-hidden" aria-label="Hero slideshow featuring marble sculptures">
+    <section 
+      className="relative h-screen w-full overflow-hidden" 
+      aria-label="Hero slideshow featuring marble sculptures"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
       <AnimatePresence mode="wait">
         <motion.div
           key={current}
@@ -44,25 +68,6 @@ const Hero = () => {
           exit={{ opacity: 0 }}
           transition={{ duration: 1.05 }}
           className="absolute inset-0"
-          onTouchStart={e => {
-            const startX = e.touches[0].clientX;
-            let moved = false;
-            const handleMove = (moveEvent) => {
-              moved = true;
-              const diff = moveEvent.touches[0].clientX - startX;
-              if (Math.abs(diff) > 50) {
-                if (diff > 0) prev();
-                else next();
-                window.removeEventListener('touchmove', handleMove);
-              }
-            };
-            const handleEnd = () => {
-              window.removeEventListener('touchmove', handleMove);
-              window.removeEventListener('touchend', handleEnd);
-            };
-            window.addEventListener('touchmove', handleMove);
-            window.addEventListener('touchend', handleEnd);
-          }}
         >
           <div 
             className="absolute inset-0 bg-cover bg-center"

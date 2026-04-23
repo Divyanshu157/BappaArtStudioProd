@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet-async';
 
 const Home = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const featuredProducts = useMemo(() => {
     return [...PRODUCTS].sort(() => Math.random() - 0.5).slice(0, 4);
   }, []);
@@ -58,11 +59,11 @@ const Home = () => {
             </div>
           </section>
 
-          {/* SECTION 3: FEATURED CATEGORIES - HORIZONTAL SCROLL */}
-          <section className="py-10 px-4 bg-white" aria-labelledby="categories-title">
-            <div className="max-w-7xl mx-auto">
+          {/* SECTION 3: FEATURED CATEGORIES - GRID LAYOUT */}
+          <section className="py-10 px-0 bg-white" aria-labelledby="categories-title">
+            <div className="max-w-full">
               <Reveal>
-                <div className="text-center mb-6">
+                <div className="text-center mb-6 px-4">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Divine Collection</span>
                   <h2 id="categories-title" className="text-4xl md:text-5xl font-bold mb-6">Browse Divine Forms</h2>
                   <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
@@ -71,9 +72,7 @@ const Home = () => {
                 </div>
               </Reveal>
 
-              <div className="relative">
-                {/* Scrollable container */}
-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-0">
                   {[
                     { 
                       name: "Ganesha", 
@@ -115,10 +114,14 @@ const Home = () => {
                     <Reveal key={i} delay={i * 0.08}>
                       <Link 
                         to="/products"
-                        className="group relative flex-shrink-0 w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
+                        className={
+                          `group relative flex-shrink-0 w-full overflow-hidden rounded-none md:rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl ${
+                            i % 6 === 0 ? 'ml-0 mr-2' : i % 6 === 5 ? 'mr-0 ml-2' : 'mx-2'
+                          }`
+                        }
                       >
                         {/* Image */}
-                        <div className="aspect-[4/5] overflow-hidden relative">
+                        <div className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative">
                           <img 
                             src={cat.image} 
                             alt={`${cat.name} marble sculpture category`}
@@ -128,36 +131,30 @@ const Home = () => {
                           <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity" />
                           
                           {/* Count badge */}
-                          <div className="absolute top-4 left-4">
-                            <span className="bg-black/60 backdrop-blur-md text-white text-xs font-bold px-3 py-1 rounded-full">
+                          <div className="absolute top-3 left-3">
+                            <span className="bg-black/60 backdrop-blur-md text-white text-[10px] md:text-xs font-bold px-2 md:px-3 py-1 rounded-full">
                               {cat.count}
                             </span>
                           </div>
                         </div>
                         
                         {/* Content */}
-                        <div className="p-6">
-                          <h3 className="text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent transition-colors">
+                        <div className="p-3 md:p-6">
+                          <h3 className="text-sm md:text-xl font-bold text-neutral-900 mb-1 md:mb-2 group-hover:text-accent transition-colors">
                             {cat.name}
                           </h3>
-                          <p className="text-neutral-600 text-sm leading-relaxed mb-4 line-clamp-2">
+                          <p className="text-neutral-600 text-[10px] md:text-sm leading-relaxed mb-2 md:mb-4 line-clamp-2">
                             {cat.desc}
                           </p>
-                          <div className="text-accent font-bold text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
-                            Explore <ArrowRight size={16} />
+                          <div className="text-accent font-bold text-[10px] md:text-sm flex items-center gap-1 md:gap-2 group-hover:gap-2 md:group-hover:gap-3 transition-all">
+                            Explore <ArrowRight size={12} md:size={16} />
                           </div>
                         </div>
                       </Link>
                     </Reveal>
                   ))}
                 </div>
-                
-                {/* Scroll indicators */}
-                <div className="flex justify-center mt-2 gap-2">
-                  <div className="text-xs text-neutral-400">← Scroll to explore more categories →</div>
-                </div>
               </div>
-            </div>
           </section>
 
           {/* SECTION 4: FEATURED PRODUCTS */}
@@ -389,8 +386,13 @@ const Home = () => {
             </div>
           </section>
 
-          {/* SECTION 8: TESTIMONIALS - AUTO SCROLLING MARQUEE */}
-          <section className="py-10 px-0 bg-neutral-50 overflow-hidden" aria-labelledby="testimonials-title">
+          {/* SECTION 8: TESTIMONIALS - AUTO SCROLLING MARQUEE WITH SWIPE */}
+          <section 
+            className="py-10 px-0 bg-neutral-50 overflow-hidden" 
+            aria-labelledby="testimonials-title"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+          >
             <div className="max-w-7xl mx-auto mb-8">
               <Reveal>
                 <div className="text-center mb-8 px-4">
@@ -405,7 +407,11 @@ const Home = () => {
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10"></div>
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10"></div>
               
-              <div className="flex animate-marquee">
+              <div 
+                className={`flex ${isPaused ? 'animate-marquee-paused' : 'animate-marquee'}`}
+                onTouchStart={() => setIsPaused(true)}
+                onTouchEnd={() => setTimeout(() => setIsPaused(false), 2000)}
+              >
                 {[
                   {
                     name: "Rajesh K. Sharma",
