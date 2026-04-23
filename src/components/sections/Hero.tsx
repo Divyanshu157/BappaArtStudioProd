@@ -28,8 +28,9 @@ const Hero = () => {
   const next = () => setCurrent((prev) => (prev + 1) % slides.length);
   const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
 
+  // Animation duration reduced by 30%
   useEffect(() => {
-    const timer = setInterval(next, 10000);
+    const timer = setInterval(next, 7000); // was 10000
     return () => clearInterval(timer);
   }, []);
 
@@ -41,8 +42,27 @@ const Hero = () => {
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 1.05 }}
           className="absolute inset-0"
+          onTouchStart={e => {
+            const startX = e.touches[0].clientX;
+            let moved = false;
+            const handleMove = (moveEvent) => {
+              moved = true;
+              const diff = moveEvent.touches[0].clientX - startX;
+              if (Math.abs(diff) > 50) {
+                if (diff > 0) prev();
+                else next();
+                window.removeEventListener('touchmove', handleMove);
+              }
+            };
+            const handleEnd = () => {
+              window.removeEventListener('touchmove', handleMove);
+              window.removeEventListener('touchend', handleEnd);
+            };
+            window.addEventListener('touchmove', handleMove);
+            window.addEventListener('touchend', handleEnd);
+          }}
         >
           <div 
             className="absolute inset-0 bg-cover bg-center"

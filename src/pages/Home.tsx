@@ -29,7 +29,7 @@ const Home = () => {
           <Hero />
           
           {/* SECTION 2: TRUST SIGNALS BAR */}
-          <section className="py-8 px-6 bg-white border-b border-neutral-100">
+          <section className="py-4 px-4 bg-white border-b border-neutral-100">
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <Reveal>
                 <div>
@@ -59,10 +59,10 @@ const Home = () => {
           </section>
 
           {/* SECTION 3: FEATURED CATEGORIES - HORIZONTAL SCROLL */}
-          <section className="py-20 px-6 bg-white" aria-labelledby="categories-title">
+          <section className="py-10 px-4 bg-white" aria-labelledby="categories-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
-                <div className="text-center mb-12">
+                <div className="text-center mb-6">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Divine Collection</span>
                   <h2 id="categories-title" className="text-4xl md:text-5xl font-bold mb-6">Browse Divine Forms</h2>
                   <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
@@ -73,7 +73,7 @@ const Home = () => {
 
               <div className="relative">
                 {/* Scrollable container */}
-                <div className="flex gap-6 overflow-x-auto pb-6 scrollbar-hide snap-x snap-mandatory">
+                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
                   {[
                     { 
                       name: "Ganesha", 
@@ -153,7 +153,7 @@ const Home = () => {
                 </div>
                 
                 {/* Scroll indicators */}
-                <div className="flex justify-center mt-6 gap-2">
+                <div className="flex justify-center mt-2 gap-2">
                   <div className="text-xs text-neutral-400">← Scroll to explore more categories →</div>
                 </div>
               </div>
@@ -161,9 +161,9 @@ const Home = () => {
           </section>
 
           {/* SECTION 4: FEATURED PRODUCTS */}
-          <section className="py-16 px-6 bg-white" aria-labelledby="featured-work-title">
+          <section className="py-8 px-4 bg-white" aria-labelledby="featured-work-title">
             <div className="max-w-7xl mx-auto">
-              <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+              <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
                 <Reveal direction="right">
                   <div className="max-w-2xl">
                     <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Best Sellers</span>
@@ -180,7 +180,7 @@ const Home = () => {
                 </Reveal>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {featuredProducts.map((product, i) => (
                   <Reveal key={product.id} delay={i * 0.1}>
                     <Link 
@@ -390,16 +390,17 @@ const Home = () => {
           </section>
 
           {/* SECTION 8: TESTIMONIALS */}
-          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="testimonials-title">
+          <section className="py-10 px-4 bg-neutral-50" aria-labelledby="testimonials-title">
             <div className="max-w-7xl mx-auto">
               <Reveal>
-                <div className="text-center mb-20">
+                <div className="text-center mb-8">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Client Stories</span>
                   <h2 id="testimonials-title" className="text-4xl md:text-5xl font-bold">Voices of Devotion</h2>
                 </div>
               </Reveal>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+              {/* Carousel for testimonials */}
+              <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {[
                   {
                     name: "Rajesh K. Sharma",
@@ -418,12 +419,12 @@ const Home = () => {
                   }
                 ].map((testimonial, i) => (
                   <Reveal key={i} delay={i * 0.1}>
-                    <div className="p-10 bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 relative h-full">
+                    <div className="min-w-[320px] max-w-[340px] md:min-w-[340px] md:max-w-[360px] snap-center p-6 md:p-8 bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 relative h-full transition-transform duration-300 hover:scale-105">
                       <Quote className="text-accent/20 absolute top-8 right-8" size={48} />
-                      <div className="flex gap-1 mb-6 text-accent">
+                      <div className="flex gap-1 mb-4 text-accent">
                         {[1,2,3,4,5].map(s => <Star key={s} size={16} fill="currentColor" />)}
                       </div>
-                      <p className="text-neutral-600 italic mb-8 leading-relaxed text-lg">
+                      <p className="text-neutral-600 italic mb-6 leading-relaxed text-base md:text-lg">
                         "{testimonial.text}"
                       </p>
                       <div>
