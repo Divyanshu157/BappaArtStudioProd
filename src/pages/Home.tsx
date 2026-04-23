@@ -389,60 +389,141 @@ const Home = () => {
             </div>
           </section>
 
-          {/* SECTION 8: TESTIMONIALS */}
-          <section className="py-10 px-4 bg-neutral-50" aria-labelledby="testimonials-title">
-            <div className="max-w-7xl mx-auto">
+          {/* SECTION 8: TESTIMONIALS - AUTO SCROLLING MARQUEE */}
+          <section className="py-10 px-0 bg-neutral-50 overflow-hidden" aria-labelledby="testimonials-title">
+            <div className="max-w-7xl mx-auto mb-8">
               <Reveal>
-                <div className="text-center mb-8">
+                <div className="text-center mb-8 px-4">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Client Stories</span>
                   <h2 id="testimonials-title" className="text-4xl md:text-5xl font-bold">Voices of Devotion</h2>
                 </div>
               </Reveal>
-
-              {/* Carousel for testimonials */}
-              <div className="flex gap-4 overflow-x-auto scrollbar-hide snap-x snap-mandatory pb-2" style={{ WebkitOverflowScrolling: 'touch' }}>
+            </div>
+            
+            {/* Infinite scrolling marquee */}
+            <div className="relative">
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10"></div>
+              
+              <div className="flex animate-marquee">
                 {[
                   {
                     name: "Rajesh K. Sharma",
                     role: "Temple Trustee, Jaipur",
-                    text: "The Ganesha moorti we commissioned is beyond words. The level of detail and the divine aura it radiates is truly exceptional. Bappa Art Studio is a gem."
+                    text: "The Ganesha moorti we commissioned is beyond words. The level of detail and the divine aura it radiates is truly exceptional."
                   },
                   {
                     name: "Anjali Mehta",
                     role: "Homeowner, Mumbai",
-                    text: "I wanted a custom mandala for my meditation room. The team understood my vision perfectly and delivered a piece that has transformed the energy of my home."
+                    text: "I wanted a custom mandala for my meditation room. The team understood my vision perfectly and delivered a piece that transformed my home."
                   },
                   {
                     name: "Dr. Vikram Singh",
                     role: "Art Collector, Delhi",
-                    text: "As a collector of traditional Indian art, I find Bappa Art Studio's work to be of the highest caliber. They maintain the soul of the craft in every piece."
+                    text: "As a collector of traditional Indian art, I find Bappa Art Studio's work to be of the highest caliber. They maintain the soul of the craft."
+                  },
+                  {
+                    name: "Priya Patel",
+                    role: "Interior Designer, Bangalore",
+                    text: "Working with Bappa Art Studio was a revelation. Their understanding of spiritual art combined with modern aesthetics is unmatched."
+                  },
+                  {
+                    name: "Mahesh Joshi",
+                    role: "Temple Committee, Udaipur",
+                    text: "We commissioned 5 marble idols for our temple. The craftsmanship exceeded all expectations. Truly divine artistry."
+                  },
+                  {
+                    name: "Sunita Rao",
+                    role: "Spiritual Guide, Chennai",
+                    text: "The Radha Krishna sculpture from Bappa Art Studio has become the centerpiece of our ashram. Its presence is deeply spiritual."
                   }
                 ].map((testimonial, i) => (
-                  <Reveal key={i} delay={i * 0.1}>
-                    <div className="min-w-[320px] max-w-[340px] md:min-w-[340px] md:max-w-[360px] snap-center p-6 md:p-8 bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 relative h-full transition-transform duration-300 hover:scale-105">
-                      <Quote className="text-accent/20 absolute top-8 right-8" size={48} />
+                  <motion.div
+                    key={`first-${i}`}
+                    className="flex-shrink-0 w-[320px] md:w-[380px] p-6 mx-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    <div className="bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 p-6 md:p-8 relative h-full">
+                      <Quote className="text-accent/20 absolute top-6 right-6" size={40} />
                       <div className="flex gap-1 mb-4 text-accent">
-                        {[1,2,3,4,5].map(s => <Star key={s} size={16} fill="currentColor" />)}
+                        {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="currentColor" />)}
                       </div>
-                      <p className="text-neutral-600 italic mb-6 leading-relaxed text-base md:text-lg">
+                      <p className="text-neutral-600 italic mb-5 leading-relaxed text-sm md:text-base">
                         "{testimonial.text}"
                       </p>
                       <div>
-                        <h4 className="font-bold text-lg">{testimonial.name}</h4>
-                        <p className="text-neutral-400 text-sm">{testimonial.role}</p>
+                        <h4 className="font-bold text-base">{testimonial.name}</h4>
+                        <p className="text-neutral-400 text-xs">{testimonial.role}</p>
                       </div>
                     </div>
-                  </Reveal>
+                  </motion.div>
+                ))}
+                {[
+                  {
+                    name: "Rajesh K. Sharma",
+                    role: "Temple Trustee, Jaipur",
+                    text: "The Ganesha moorti we commissioned is beyond words. The level of detail and the divine aura it radiates is truly exceptional."
+                  },
+                  {
+                    name: "Anjali Mehta",
+                    role: "Homeowner, Mumbai",
+                    text: "I wanted a custom mandala for my meditation room. The team understood my vision perfectly and delivered a piece that transformed my home."
+                  },
+                  {
+                    name: "Dr. Vikram Singh",
+                    role: "Art Collector, Delhi",
+                    text: "As a collector of traditional Indian art, I find Bappa Art Studio's work to be of the highest caliber. They maintain the soul of the craft."
+                  },
+                  {
+                    name: "Priya Patel",
+                    role: "Interior Designer, Bangalore",
+                    text: "Working with Bappa Art Studio was a revelation. Their understanding of spiritual art combined with modern aesthetics is unmatched."
+                  },
+                  {
+                    name: "Mahesh Joshi",
+                    role: "Temple Committee, Udaipur",
+                    text: "We commissioned 5 marble idols for our temple. The craftsmanship exceeded all expectations. Truly divine artistry."
+                  },
+                  {
+                    name: "Sunita Rao",
+                    role: "Spiritual Guide, Chennai",
+                    text: "The Radha Krishna sculpture from Bappa Art Studio has become the centerpiece of our ashram. Its presence is deeply spiritual."
+                  }
+                ].map((testimonial, i) => (
+                  <motion.div
+                    key={`second-${i}`}
+                    className="flex-shrink-0 w-[320px] md:w-[380px] p-6 mx-4"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: i * 0.1 }}
+                  >
+                    <div className="bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 p-6 md:p-8 relative h-full">
+                      <Quote className="text-accent/20 absolute top-6 right-6" size={40} />
+                      <div className="flex gap-1 mb-4 text-accent">
+                        {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="currentColor" />)}
+                      </div>
+                      <p className="text-neutral-600 italic mb-5 leading-relaxed text-sm md:text-base">
+                        "{testimonial.text}"
+                      </p>
+                      <div>
+                        <h4 className="font-bold text-base">{testimonial.name}</h4>
+                        <p className="text-neutral-400 text-xs">{testimonial.role}</p>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
-              <Reveal>
-                <div className="mt-16 text-center">
-                  <Link to="/testimonials" className="text-accent font-bold hover:underline inline-flex items-center gap-2">
-                    Read More Stories <ArrowRight size={20} />
-                  </Link>
-                </div>
-              </Reveal>
             </div>
+            
+            <Reveal>
+              <div className="mt-12 text-center px-4">
+                <Link to="/testimonials" className="text-accent font-bold hover:underline inline-flex items-center gap-2">
+                  Read More Stories <ArrowRight size={20} />
+                </Link>
+              </div>
+            </Reveal>
           </section>
 
           {/* SECTION 9: GLOBAL SHIPPING & EXPORT TRUST */}
