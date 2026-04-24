@@ -10,7 +10,7 @@ const FacesBehind = () => {
     {
       name: "Chandra Prakash Sharma",
       role: "Chief Sculptor & Founder",
-      image: "https://picsum.photos/seed/f1/600/800",
+      image: "/assets/images/banner2.jpg",
       desc: "With over 30 years of experience, Chandra Prakash ji is the visionary behind Bappa Art Studio. He sculpts each murti with divine precision and heartfelt devotion, ensuring every piece carries a soul."
     },
     {
@@ -33,7 +33,7 @@ const FacesBehind = () => {
         <div className="min-h-screen flex flex-col bg-neutral-50">
           {/* Hero Section */}
           <section className="relative min-h-[60vh] flex items-center justify-center text-center px-6 bg-neutral-900 pt-32 pb-12">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/artisans-hero/1920/1080')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner3.jpg')] bg-cover bg-center" />
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
             <div className="relative z-10 max-w-4xl">
               <Reveal>
@@ -110,7 +110,7 @@ const FacesBehind = () => {
               <Reveal direction="left">
                 <div className="order-1 lg:order-2 relative">
                   <div className="rounded-[3rem] overflow-hidden shadow-2xl">
-                    <img src="https://picsum.photos/seed/studio-culture/800/600" alt="Studio Culture" className="w-full h-full object-cover" />
+                    <img src="/assets/images/banner2.jpg" alt="Studio Culture" className="w-full h-full object-cover" />
                   </div>
                   <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10" />
                 </div>

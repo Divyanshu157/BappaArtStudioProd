@@ -35,7 +35,7 @@ const Contact = () => {
       <PageTransition>
         <div className="min-h-screen bg-[#050505] text-white">
           <section className="relative overflow-hidden bg-[#080808]">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/contact-hero/1920/1080')] bg-cover bg-center opacity-90" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner3.jpg')] bg-cover bg-center opacity-90" />
             <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/70 to-black/80" />
             <div className="relative z-10 px-6 py-24 lg:py-32">
               <div className="max-w-6xl mx-auto text-center">
@@ -232,7 +232,7 @@ const Contact = () => {
                 <Reveal direction="up" delay={0.2}>
                   <div className="rounded-[3rem] border border-white/10 bg-white/5 overflow-hidden shadow-2xl shadow-black/20 backdrop-blur-xl">
                     <div className="relative h-full min-h-[28rem]">
-                      <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/sculpture-art/800/1200')] bg-cover bg-center" />
+                      <div className="absolute inset-0 bg-[url('/assets/images/banner2.jpg')] bg-cover bg-center" />
                       <div className="absolute inset-0 bg-black/50" />
                       <div className="relative p-8 h-full flex flex-col justify-between">
                         <div>

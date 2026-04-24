@@ -12,7 +12,7 @@ const VisionValues = () => {
         <div className="min-h-screen flex flex-col">
           {/* Hero Section */}
           <section className="relative min-h-[70vh] flex items-center justify-center text-center px-6 bg-neutral-900 pt-32 pb-12">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/vision-hero/1920/1080')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner2.jpg')] bg-cover bg-center" />
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
             <div className="relative z-10 max-w-4xl">
               <Reveal>

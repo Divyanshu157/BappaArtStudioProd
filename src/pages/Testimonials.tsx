@@ -10,37 +10,37 @@ const testimonials = [
     name: "Rajesh K. Sharma",
     role: "Temple Trustee, Jaipur",
     text: "The Ganesha moorti we commissioned is beyond words. The level of detail and the divine aura it radiates is truly exceptional. Bappa Art Studio is a gem.",
-    image: "https://picsum.photos/seed/t1/200/200"
+    image: "/assets/images/banner2.jpg"
   },
   {
     name: "Anjali Mehta",
     role: "Homeowner, Mumbai",
     text: "I wanted a custom mandala for my meditation room. The team understood my vision perfectly and delivered a piece that has transformed the energy of my home.",
-    image: "https://picsum.photos/seed/t2/200/200"
+    image: "/assets/images/banner3.jpg"
   },
   {
     name: "Dr. Vikram Singh",
     role: "Art Collector, Delhi",
     text: "As a collector of traditional Indian art, I find Bappa Art Studio's work to be of the highest caliber. They maintain the soul of the craft in every piece.",
-    image: "https://picsum.photos/seed/t3/200/200"
+    image: "/assets/images/banner2.jpg"
   },
   {
     name: "Sanjay Singhania",
     role: "Architect, Bangalore",
     text: "Working with Bappa Art Studio on our latest temple project was a seamless experience. Their understanding of architectural scale and Vastu is commendable.",
-    image: "https://picsum.photos/seed/t4/200/200"
+    image: "/assets/images/banner3.jpg"
   },
   {
     name: "Priya Das",
     role: "Interior Designer, Kolkata",
     text: "The finishing on their marble portraits is incredibly lifelike. My clients were moved to tears by the sculpture of their late grandfather.",
-    image: "https://picsum.photos/seed/t5/200/200"
+    image: "/assets/images/banner2.jpg"
   },
   {
     name: "Amitabh Bachchan (Fan)",
     role: "Collector, Mumbai",
     text: "The quality of Makrana marble they use is superior. The translucency and the 'glow' are exactly what you expect from world-class artisans.",
-    image: "https://picsum.photos/seed/t6/200/200"
+    image: "/assets/images/banner3.jpg"
   }
 ];
 
@@ -51,7 +51,7 @@ const Testimonials = () => {
         <div className="min-h-screen flex flex-col bg-neutral-50">
           {/* Hero Section */}
           <section className="relative min-h-[60vh] flex items-center justify-center text-center px-6 bg-neutral-900 pt-32 pb-12">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/testimonials-hero/1920/1080')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner3.jpg')] bg-cover bg-center" />
             <div className="absolute inset-0 bg-black/60 backdrop-blur-[1px]" />
             <div className="relative z-10 max-w-4xl">
               <Reveal>

@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useRef } from 'react';
 import { motion } from 'motion/react';
 import Hero from '@/src/components/sections/Hero';
 import { PRODUCTS } from '@/src/data';
@@ -12,9 +12,26 @@ import { Helmet } from 'react-helmet-async';
 const Home = () => {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
+  const testimonialsRef = useRef<HTMLDivElement | null>(null);
   const featuredProducts = useMemo(() => {
     return [...PRODUCTS].sort(() => Math.random() - 0.5).slice(0, 4);
   }, []);
+
+  useEffect(() => {
+    if (isPaused) return;
+    const el = testimonialsRef.current;
+    if (!el) return;
+
+    const tick = () => {
+      // Slow auto-scroll that still allows native swipe/flick.
+      const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+      if (atEnd) el.scrollLeft = 0;
+      else el.scrollLeft += 1;
+    };
+
+    const id = window.setInterval(tick, 25);
+    return () => window.clearInterval(id);
+  }, [isPaused]);
 
   return (
     <Layout transparentNavbar>
@@ -30,7 +47,7 @@ const Home = () => {
           <Hero />
           
           {/* SECTION 2: TRUST SIGNALS BAR */}
-          <section className="py-4 px-4 bg-white border-b border-neutral-100">
+          <section className="py-6 px-4 section-surface section-tint-amber border-b border-neutral-200/40">
             <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
               <Reveal>
                 <div>
@@ -60,7 +77,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 3: FEATURED CATEGORIES - GRID LAYOUT */}
-          <section className="py-10 px-0 bg-white" aria-labelledby="categories-title">
+          <section className="py-12 px-0 section-surface section-tint-ivory" aria-labelledby="categories-title">
             <div className="max-w-full">
               <Reveal>
                 <div className="text-center mb-6 px-4">
@@ -74,7 +91,7 @@ const Home = () => {
 
               <div className="relative">
                 {/* Scrollable container */}
-                <div className="flex gap-4 overflow-x-auto pb-4 scrollbar-hide snap-x snap-mandatory">
+                <div className="flex items-stretch gap-4 overflow-x-auto overflow-y-hidden pb-4 px-4 scrollbar-hide snap-x snap-mandatory overscroll-x-contain">
                   {[
                     { 
                       name: "Ganesha", 
@@ -115,11 +132,11 @@ const Home = () => {
                   ].map((cat, i) => (
                     <Reveal key={i} delay={i * 0.08}>
                       <Link 
-                        to="/products"
-                        className="group relative flex-shrink-0 w-72 md:w-80 overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl snap-center"
+                        to={`/products?category=${encodeURIComponent(cat.name)}`}
+                        className="group relative flex-shrink-0 snap-center overflow-hidden rounded-[2rem] bg-white border border-neutral-100 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-xl w-[78vw] max-w-[320px] md:w-80 flex flex-col"
                       >
                         {/* Image */}
-                        <div className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative">
+                        <div className="aspect-[3/4] md:aspect-[4/5] overflow-hidden relative shrink-0">
                           <img 
                             src={cat.image} 
                             alt={`${cat.name} marble sculpture category`}
@@ -137,15 +154,15 @@ const Home = () => {
                         </div>
                         
                         {/* Content */}
-                        <div className="p-3 md:p-6">
-                          <h3 className="text-sm md:text-xl font-bold text-neutral-900 mb-1 md:mb-2 group-hover:text-accent transition-colors">
+                        <div className="p-4 md:p-6 flex flex-col flex-1">
+                          <h3 className="text-base md:text-xl font-bold text-neutral-900 mb-2 group-hover:text-accent transition-colors">
                             {cat.name}
                           </h3>
-                          <p className="text-neutral-600 text-[10px] md:text-sm leading-relaxed mb-2 md:mb-4 line-clamp-2">
+                          <p className="text-neutral-600 text-xs md:text-sm leading-relaxed mb-4 line-clamp-2">
                             {cat.desc}
                           </p>
-                          <div className="text-accent font-bold text-[10px] md:text-sm flex items-center gap-1 md:gap-2 group-hover:gap-2 md:group-hover:gap-3 transition-all">
-                            Explore <ArrowRight size={12} md:size={16} />
+                          <div className="mt-auto text-accent font-bold text-xs md:text-sm flex items-center gap-2 group-hover:gap-3 transition-all">
+                            Explore <ArrowRight className="w-3 h-3 md:w-4 md:h-4" />
                           </div>
                         </div>
                       </Link>
@@ -161,7 +178,7 @@ const Home = () => {
           </section>
 
           {/* SECTION 4: FEATURED PRODUCTS */}
-          <section className="py-8 px-4 bg-white" aria-labelledby="featured-work-title">
+          <section className="py-12 px-4 section-surface section-tint-slate" aria-labelledby="featured-work-title">
             <div className="max-w-7xl mx-auto">
               <div className="flex flex-col md:flex-row justify-between items-end mb-8 gap-4">
                 <Reveal direction="right">
@@ -212,8 +229,21 @@ const Home = () => {
           </section>
 
           {/* SECTION 5: HERITAGE & LEGACY */}
-          <section className="py-20 px-6 bg-neutral-50" aria-labelledby="legacy-title">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center">
+          <section className="py-20 px-6 section-surface section-tint-ivory relative overflow-hidden" aria-labelledby="legacy-title">
+            <div
+              className="absolute inset-0 opacity-90"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(252,163,17,0.22) 0%, rgba(255,255,255,0.65) 55%, rgba(255,255,255,0.80) 100%), url('/assets/images/Priyanshu.png'), url('/assets/images/ganesh/g1.jpeg')",
+                backgroundSize: "cover, cover, cover",
+                backgroundPosition: "center, 20% 30%, 75% 25%",
+                backgroundRepeat: "no-repeat, no-repeat, no-repeat",
+                filter: "saturate(1.1) contrast(1.08)",
+              }}
+            />
+            <div className="absolute inset-0 bg-white/35 backdrop-blur-[2px]" aria-hidden="true" />
+            <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-24 items-center relative z-10">
               <Reveal direction="right">
                 <div className="relative">
                   <div className="relative z-10 rounded-[3rem] overflow-hidden shadow-2xl w-[90%] max-w-[40rem] h-[34rem] mx-auto">
@@ -276,10 +306,10 @@ const Home = () => {
           </section>
 
           {/* SECTION 6: WHY CHOOSE US (Trust Section) */}
-          <section className="py-20 px-6 bg-white" aria-labelledby="why-choose-title">
-            <div className="max-w-7xl mx-auto">
+          <section className="py-14 md:py-16 px-6 relative overflow-hidden" aria-labelledby="why-choose-title">
+            <div className="max-w-7xl mx-auto relative z-10 glass-surface glass-tint-rose rounded-[3rem] p-8 md:p-12">
               <Reveal>
-                <div className="text-center mb-20">
+                <div className="text-center mb-10 md:mb-12">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Why Choose Bappa</span>
                   <h2 id="why-choose-title" className="text-4xl md:text-6xl font-bold mb-6">What Sets Us Apart</h2>
                   <p className="text-neutral-600 text-lg max-w-2xl mx-auto">
@@ -322,13 +352,21 @@ const Home = () => {
                   }
                 ].map((item, i) => (
                   <Reveal key={i} delay={i * 0.05}>
-                    <div className="p-8 bg-neutral-50 rounded-[2rem] border border-neutral-100 hover:border-accent hover:shadow-lg transition-all">
+                    <motion.div
+                      initial={{ opacity: 0, y: 14 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-80px" }}
+                      transition={{ duration: 0.5, ease: "easeOut" }}
+                      whileHover={{ y: -6, scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      className="p-8 glass-card rounded-[2rem] hover:border-accent hover:shadow-lg transition-all will-change-transform"
+                    >
                       <div className="w-16 h-16 rounded-2xl bg-accent/10 flex items-center justify-center text-accent mb-6">
                         {item.icon}
                       </div>
                       <h3 className="text-xl font-bold mb-3">{item.title}</h3>
                       <p className="text-neutral-600 leading-relaxed">{item.desc}</p>
-                    </div>
+                    </motion.div>
                   </Reveal>
                 ))}
               </div>
@@ -391,14 +429,27 @@ const Home = () => {
 
           {/* SECTION 8: TESTIMONIALS - AUTO SCROLLING MARQUEE WITH SWIPE */}
           <section 
-            className="py-10 px-0 bg-neutral-50 overflow-hidden" 
+            className="py-14 px-0 relative overflow-hidden" 
             aria-labelledby="testimonials-title"
             onMouseEnter={() => setIsPaused(true)}
             onMouseLeave={() => setIsPaused(false)}
           >
-            <div className="max-w-7xl mx-auto mb-8">
+            <div
+              className="absolute inset-0 opacity-80"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(252,163,17,0.25) 0%, rgba(255,255,255,0.55) 60%, rgba(255,255,255,0.78) 100%), url('/assets/images/banner3.jpg'), url('/assets/images/shiva/m1.jpeg')",
+                backgroundSize: "cover, cover, cover",
+                backgroundPosition: "center, center, 70% 35%",
+                backgroundRepeat: "no-repeat, no-repeat, no-repeat",
+                filter: "saturate(1.1) contrast(1.08)",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/20 via-white/35 to-white/55" aria-hidden="true" />
+            <div className="max-w-7xl mx-auto mb-8 relative z-10">
               <Reveal>
-                <div className="text-center mb-8 px-4">
+                <div className="text-center px-4">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Client Stories</span>
                   <h2 id="testimonials-title" className="text-4xl md:text-5xl font-bold">Voices of Devotion</h2>
                 </div>
@@ -406,14 +457,18 @@ const Home = () => {
             </div>
             
             {/* Infinite scrolling marquee */}
-            <div className="relative">
+            <div className="relative z-10">
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-neutral-50 to-transparent z-10"></div>
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-neutral-50 to-transparent z-10"></div>
               
-              <div 
-                className={`flex ${isPaused ? 'animate-marquee-paused' : 'animate-marquee'}`}
+              <div
+                ref={testimonialsRef}
+                className="flex gap-4 overflow-x-auto overflow-y-hidden scrollbar-hide scroll-smooth snap-x snap-mandatory px-4"
+                style={{ WebkitOverflowScrolling: "touch" }}
                 onTouchStart={() => setIsPaused(true)}
-                onTouchEnd={() => setTimeout(() => setIsPaused(false), 2000)}
+                onTouchEnd={() => setTimeout(() => setIsPaused(false), 1500)}
+                onMouseDown={() => setIsPaused(true)}
+                onMouseUp={() => setTimeout(() => setIsPaused(false), 800)}
               >
                 {[
                   {
@@ -449,66 +504,12 @@ const Home = () => {
                 ].map((testimonial, i) => (
                   <motion.div
                     key={`first-${i}`}
-                    className="flex-shrink-0 w-[320px] md:w-[380px] p-6 mx-4"
+                    className="flex-shrink-0 w-[320px] md:w-[380px] p-6 snap-center"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.5, delay: i * 0.1 }}
                   >
-                    <div className="bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 p-6 md:p-8 relative h-full">
-                      <Quote className="text-accent/20 absolute top-6 right-6" size={40} />
-                      <div className="flex gap-1 mb-4 text-accent">
-                        {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="currentColor" />)}
-                      </div>
-                      <p className="text-neutral-600 italic mb-5 leading-relaxed text-sm md:text-base">
-                        "{testimonial.text}"
-                      </p>
-                      <div>
-                        <h4 className="font-bold text-base">{testimonial.name}</h4>
-                        <p className="text-neutral-400 text-xs">{testimonial.role}</p>
-                      </div>
-                    </div>
-                  </motion.div>
-                ))}
-                {[
-                  {
-                    name: "Rajesh K. Sharma",
-                    role: "Temple Trustee, Jaipur",
-                    text: "The Ganesha moorti we commissioned is beyond words. The level of detail and the divine aura it radiates is truly exceptional."
-                  },
-                  {
-                    name: "Anjali Mehta",
-                    role: "Homeowner, Mumbai",
-                    text: "I wanted a custom mandala for my meditation room. The team understood my vision perfectly and delivered a piece that transformed my home."
-                  },
-                  {
-                    name: "Dr. Vikram Singh",
-                    role: "Art Collector, Delhi",
-                    text: "As a collector of traditional Indian art, I find Bappa Art Studio's work to be of the highest caliber. They maintain the soul of the craft."
-                  },
-                  {
-                    name: "Priya Patel",
-                    role: "Interior Designer, Bangalore",
-                    text: "Working with Bappa Art Studio was a revelation. Their understanding of spiritual art combined with modern aesthetics is unmatched."
-                  },
-                  {
-                    name: "Mahesh Joshi",
-                    role: "Temple Committee, Udaipur",
-                    text: "We commissioned 5 marble idols for our temple. The craftsmanship exceeded all expectations. Truly divine artistry."
-                  },
-                  {
-                    name: "Sunita Rao",
-                    role: "Spiritual Guide, Chennai",
-                    text: "The Radha Krishna sculpture from Bappa Art Studio has become the centerpiece of our ashram. Its presence is deeply spiritual."
-                  }
-                ].map((testimonial, i) => (
-                  <motion.div
-                    key={`second-${i}`}
-                    className="flex-shrink-0 w-[320px] md:w-[380px] p-6 mx-4"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.5, delay: i * 0.1 }}
-                  >
-                    <div className="bg-white rounded-[2.5rem] shadow-sm border border-neutral-100 p-6 md:p-8 relative h-full">
+                    <div className="glass-card rounded-[2.5rem] p-6 md:p-8 relative h-full">
                       <Quote className="text-accent/20 absolute top-6 right-6" size={40} />
                       <div className="flex gap-1 mb-4 text-accent">
                         {[1,2,3,4,5].map(s => <Star key={s} size={14} fill="currentColor" />)}
@@ -536,8 +537,8 @@ const Home = () => {
           </section>
 
           {/* SECTION 9: GLOBAL SHIPPING & EXPORT TRUST */}
-          <section className="py-16 px-6 bg-white" aria-labelledby="shipping-title">
-            <div className="max-w-7xl mx-auto">
+          <section className="py-16 px-6 relative overflow-hidden" aria-labelledby="shipping-title">
+            <div className="max-w-7xl mx-auto relative z-10 glass-surface rounded-[3rem] p-10 md:p-14">
               <Reveal>
                 <div className="text-center mb-16">
                   <span className="text-accent font-bold uppercase tracking-[0.3em] text-xs mb-4 block">Worldwide Delivery</span>
@@ -575,9 +576,23 @@ const Home = () => {
           </section>
 
           {/* SECTION 10: FINAL CTA */}
-          <section className="py-16 px-6">
+          <section className="py-16 px-6 relative overflow-hidden">
+            <div
+              className="absolute inset-0 opacity-35"
+              aria-hidden="true"
+              style={{
+                backgroundImage:
+                  "linear-gradient(180deg, rgba(252,163,17,0.28) 0%, rgba(0,0,0,0.14) 100%), url('/assets/images/ganesh/g2.jpeg'), url('/assets/images/radha-krishna/rk2.jpeg')",
+                backgroundSize: "cover, cover, cover",
+                backgroundPosition: "center, 15% 35%, 85% 35%",
+                backgroundRepeat: "no-repeat, no-repeat, no-repeat",
+                filter: "saturate(1.08) contrast(1.05) blur(14px)",
+                transform: "scale(1.05)",
+              }}
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/10 via-white/10 to-black/10" aria-hidden="true" />
             <Reveal>
-              <div className="max-w-7xl mx-auto bg-accent rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-accent/20">
+              <div className="max-w-7xl mx-auto bg-accent/95 rounded-[3.5rem] p-12 md:p-24 text-center relative overflow-hidden shadow-2xl shadow-accent/25 border border-white/40">
                 <div className="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl" />
                 <div className="absolute bottom-0 left-0 w-96 h-96 bg-black/5 rounded-full translate-y-1/2 -translate-x-1/2 blur-3xl" />
                 

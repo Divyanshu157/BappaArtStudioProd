@@ -9,10 +9,17 @@ import PageTransition from '@/src/components/layout/PageTransition';
 import { Reveal } from '@/src/components/ui/Reveal';
 
 const Products = () => {
+  const [searchParams, setSearchParams] = useSearchParams();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
 
-  const categories = ["All", "Ganesha", "Radha Krishna", "Hanuman", "Shiva", "Durga", "Ram", "Sai Baba", "Laxmi", "Vishnu", "Kartikeya", "Temple", "Abstract", "Portrait"];
+  const categories = ["All", "Ganesha", "Radha Krishna", "Krishna", "Hanuman", "Shiva", "Durga", "Ram", "Saraswati", "Sai Baba", "Laxmi", "Vishnu", "Kartikeya", "Temple", "Abstract", "Portrait"];
+
+  useEffect(() => {
+    const urlCategory = searchParams.get("category");
+    if (!urlCategory) return;
+    if (categories.includes(urlCategory)) setActiveCategory(urlCategory);
+  }, [searchParams]);
 
   const shuffledProducts = useMemo(() => {
     return [...PRODUCTS].sort(() => Math.random() - 0.5);
@@ -31,7 +38,7 @@ const Products = () => {
         <div className="min-h-screen bg-neutral-50 flex flex-col">
           {/* Header Section */}
           <section className="relative min-h-[30vh] flex items-center justify-center text-center px-6 bg-neutral-900 pt-24 pb-8">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/gallery-hero/1920/1080')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner2.jpg')] bg-cover bg-center" />
             <div className="absolute inset-0 bg-black/70 backdrop-blur-[2px]" />
             <div className="relative z-10 max-w-4xl">
               <Reveal>
@@ -53,7 +60,15 @@ const Products = () => {
                     {categories.map((cat) => (
                       <button 
                         key={cat}
-                        onClick={() => setActiveCategory(cat)}
+                        onClick={() => {
+                          setActiveCategory(cat);
+                          setSearchParams((prev) => {
+                            const next = new URLSearchParams(prev);
+                            if (cat === "All") next.delete("category");
+                            else next.set("category", cat);
+                            return next;
+                          });
+                        }}
                         className={cn(
                           "px-8 py-3 rounded-full border transition-all font-bold text-sm cursor-pointer",
                           activeCategory === cat 

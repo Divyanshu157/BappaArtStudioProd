@@ -35,7 +35,7 @@ const SignatureCrafting = () => {
         <div className="min-h-screen flex flex-col">
           {/* Hero Section */}
           <section className="relative min-h-[60vh] flex items-center justify-center text-center px-6 bg-neutral-900 pt-32 pb-12">
-            <div className="absolute inset-0 bg-[url('https://picsum.photos/seed/crafting-hero/1920/1080')] bg-cover bg-center" />
+            <div className="absolute inset-0 bg-[url('/assets/images/banner3.jpg')] bg-cover bg-center" />
             <div className="absolute inset-0 bg-black/70 backdrop-blur-[1px]" />
             <div className="relative z-10 max-w-4xl">
               <Reveal>
@@ -83,7 +83,7 @@ const SignatureCrafting = () => {
               <Reveal direction="right">
                 <div className="relative">
                   <div className="rounded-[3rem] overflow-hidden shadow-2xl">
-                    <img src="https://picsum.photos/seed/detail-craft/800/1000" alt="Detailed Crafting" className="w-full h-full object-cover" />
+                    <img src="/assets/images/banner2.jpg" alt="Detailed Crafting" className="w-full h-full object-cover" />
                   </div>
                   <div className="absolute -top-10 -right-10 w-40 h-40 bg-accent/10 rounded-full blur-3xl -z-10" />
                 </div>

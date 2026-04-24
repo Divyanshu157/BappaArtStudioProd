@@ -6,17 +6,20 @@ import { cn } from '@/src/lib/utils';
 
 const slides = [
   {
-    image: "/assets/images/ganesh/g1.jpeg",
+    desktopImage: "/assets/images/banner2.jpg",
+    mobileImage: "/assets/images/ganesh/g1.jpeg",
     title: "The Soul of Marble",
     subtitle: "Meticulously handcrafted using timeless techniques passed through generations."
   },
   {
-    image: "/assets/images/saraswati/s1.jpeg",
+    desktopImage: "/assets/images/banner3.jpg",
+    mobileImage: "/assets/images/saraswati/s1.jpeg",
     title: "Bespoke Divine Creations",
     subtitle: "Tailored to your space and devotion, bringing spiritual energy to your home."
   },
   {
-    image: "/assets/images/mama.png",  
+    desktopImage: "/assets/images/mama.png",
+    mobileImage: "/assets/images/radha-krishna/rk1.jpeg",
     title: "Ancient Art Meets Modern Grace",
     subtitle: "Crafting divine sculptures for over five decades with unwavering devotion."
   }
@@ -25,6 +28,7 @@ const slides = [
 const Hero = () => {
   const [current, setCurrent] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState(false);
 
   const next = () => setCurrent((prev) => (prev + 1) % slides.length);
   const prev = () => setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
@@ -33,6 +37,14 @@ const Hero = () => {
   useEffect(() => {
     const timer = setInterval(next, 7000); // was 10000
     return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(max-width: 768px)");
+    const apply = () => setIsMobile(mq.matches);
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
   }, []);
 
   const handleTouchStart = (e: React.TouchEvent) => {
@@ -55,23 +67,26 @@ const Hero = () => {
 
   return (
     <section 
-      className="relative h-screen w-full overflow-hidden" 
+      className="relative h-screen w-full overflow-hidden bg-neutral-950" 
       aria-label="Hero slideshow featuring marble sculptures"
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}
     >
-      <AnimatePresence mode="wait">
+      <AnimatePresence initial={false} mode="sync">
         <motion.div
           key={current}
           initial={{ opacity: 0, scale: 1.1 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.05 }}
+          transition={{ duration: 1.05, ease: "easeInOut" }}
           className="absolute inset-0"
         >
           <div 
-            className="absolute inset-0 bg-cover bg-center"
-            style={{ backgroundImage: `url(${slides[current].image})` }}
+            className={cn(
+              "absolute inset-0 bg-cover",
+              isMobile ? "bg-[position:center_top]" : "bg-center"
+            )}
+            style={{ backgroundImage: `url(${isMobile ? slides[current].mobileImage : slides[current].desktopImage})` }}
             role="img"
             aria-label={slides[current].title}
           />
