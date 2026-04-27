@@ -9,6 +9,23 @@
       }
     }
   ],
+  "redirects": [
+    {
+      "source": "http://bappaartstudio.com/:path*",
+      "destination": "https://www.bappaartstudio.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "https://bappaartstudio.com/:path*",
+      "destination": "https://www.bappaartstudio.com/:path*",
+      "permanent": true
+    },
+    {
+      "source": "http://www.bappaartstudio.com/:path*",
+      "destination": "https://www.bappaartstudio.com/:path*",
+      "permanent": true
+    }
+  ],
   "routes": [
     { "handle": "filesystem" },
     { "src": "/(.*)", "dest": "/index.html" }
