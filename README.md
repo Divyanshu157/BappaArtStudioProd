@@ -11,7 +11,7 @@ The platform provides an elegant digital experience for art lovers and potential
 Deployed on **Vercel**
 
 ```
-https://your-vercel-url.vercel.app
+https://www.bappaartstudio.com/
 ```
 
 ---
