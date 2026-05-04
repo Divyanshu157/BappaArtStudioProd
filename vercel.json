@@ -1,17 +1,13 @@
 {
   "redirects": [
     {
-      "source": "http://bappaartstudio.com/:path*",
-      "destination": "https://www.bappaartstudio.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "https://bappaartstudio.com/:path*",
-      "destination": "https://www.bappaartstudio.com/:path*",
-      "permanent": true
-    },
-    {
-      "source": "http://www.bappaartstudio.com/:path*",
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "bappaartstudio.com"
+        }
+      ],
       "destination": "https://www.bappaartstudio.com/:path*",
       "permanent": true
     }
